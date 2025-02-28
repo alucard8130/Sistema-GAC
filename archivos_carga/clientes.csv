@@ -1,0 +1,24 @@
+﻿id,nombre o razon social,rfc,tipo contribuyente,curp,area o local,tipo_cliente,giro,direccion,telefono,email,fecha_reg,status,usuario
+,TIENDAS SORIANA SAB DE CV,AXXX010101XX1,persona moral,,ANCLA 1,locales comerciales,TIENDA AUTOSERVICIO,,,,03/02/2025,activo,administrador
+,VERONICA ROIZ TORRUCO,AXXX010101XX2,persona fisica,,L-DEPARTAMENTAL,locales comerciales,"FIRS CASH,MODATELAS,CFE,HSBC",,,,03/02/2025,activo,administrador
+,RESTAURANTES TOKS SAB DE CV,AXXX010101XX3,persona moral,,ISLA 1,locales comerciales,RESTAURANTES TOKS,,,,03/02/2025,activo,administrador
+,BBVA MEXICO SAB DE CV,AXXX010101XX4,persona moral,,ISLA 2,locales comerciales,BANCOMER,,,,03/02/2025,activo,administrador
+,COMERCIALIZADORA FARMACEUTICA DEL SURESTE SA DE CV,AXXX010101XX5,persona moral,,ISLA 3,locales comerciales,FARMATODO,,,,03/02/2025,activo,administrador
+,LUIS MANUEL CHONG GUERRA,AXXX010101XX6,persona fisica,,SUB-A1,locales comerciales,MARISQUERIA,,,,03/02/2025,activo,administrador
+,BLANCA ESTELA HERNANDEZ SANTANA,AXXX010101XX7,persona fisica,,SUB-A2,locales comerciales,,,,,03/02/2025,activo,administrador
+,HUGO ARTURO MARTINEZ HERNANDEZ,AXXX010101XX8,persona fisica,,SUB-A3,locales comerciales,MUEBLES HART,,,,03/02/2025,activo,administrador
+,AURORA MARGARITA PEREZ MONTERO,AXXX010101XX9,persona fisica,,SUB-A4,locales comerciales,INFONAVIT,,,,03/02/2025,activo,administrador
+,INVITA PHARMA SA DE CV,AXXX010101XX10,persona moral,,SUB-A4B Y SUB-A4C,locales comerciales,NEOVITA,,,,03/02/2025,activo,administrador
+,HUGO ARTURO MARTINEZ HERNANDEZ,AXXX010101XX11,persona fisica,,L-VIDEOCENTRO,locales comerciales,MUEBLES HART,,,,03/02/2025,activo,administrador
+,LAURA CHONG GUERRA,AXXX010101XX12,persona fisica,,A-1,locales comerciales,MASAJES,,,,03/02/2025,activo,administrador
+,BLANCA ESTELA HERNANDEZ SANTANA,AXXX010101XX13,persona fisica,,A-2,locales comerciales,FRIKI WORLD,,,,03/02/2025,activo,administrador
+,JULIAN JOSE PEREZ ABUIN,AXXX010101XX14,persona fisica,,A-3,locales comerciales,TATUAJES RITO TRIBAL,,,,03/02/2025,activo,administrador
+,JUANA CARMONA MENDOZA,AXXX010101XX15,persona fisica,,6-K,areas comunes,SERVICIOS TESORERIA,,,,03/02/2025,activo,administrador
+,ARIANNA RODRIGUEZ ALMORA,AXXX010101XX16,persona fisica,,52-K,areas comunes,SERVCIOS FUNEBRES,,,,03/02/2025,activo,administrador
+,SERVICIOS NOVASAT S DE RL DE CV,AXXX010101XX17,persona moral,,64-K,areas comunes,ACCESORIOS MOTO,,,,03/02/2025,activo,administrador
+,JORGE TRIPP ARIAS,AXXX010101XX18,persona fisica,,83-K,areas comunes,JUEGOS DE HABILIDADES,,,,03/02/2025,activo,administrador
+,MARIA JOSEFINA REMACHE CISNEROS,AXXX010101XX19,persona fisica,,101-K,areas comunes,CABALLETES PARA PINTAR,,,,03/02/2025,activo,administrador
+,DANIEL GODINEZ ALCAZAR,AXXX010101XX20,persona fisica,,105-K,areas comunes,VENTA BISUTERIA,,,,03/02/2025,activo,administrador
+,ANDRES MENDOZA MENDEZ,AXXX010101XX21,persona fisica,,118-K,areas comunes,VENTA BISUTERIA,,,,03/02/2025,activo,administrador
+,ALAN GONZALEZ MORAN,AXXX010101XX22,persona fisica,,120-K,areas comunes,,,,,03/02/2025,activo,administrador
+,JULIO CESAR MORALES BAUTISTA,AXXX010101XX23,persona fisica,,122-K,areas comunes,,,,,03/02/2025,activo,administrador

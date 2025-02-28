@@ -1,0 +1,10 @@
+-- database: ./gac.db
+
+SELECT *,
+CASE
+	WHEN fecha_fin < fecha_reg THEN 'Vencido'
+	ELSE 'Vigente'
+END AS status_vig 
+FROM contratos as VIRTUAL;
+
+
