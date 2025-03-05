@@ -1,9 +1,9 @@
 from model.operaciones import Reg_Cartera, Reg_Factura
 import conexion as con
+from model.regperiodofacturacion import RegPeriodoFacturacion
 
 
 class RegCarteraData():
-    #funcion conecta a bd y registra un pago en base de datos cartera
     def _registrar(self, info=Reg_Cartera):
         self.db = con.Conexion().conectarBd()
         self.cursor= self.db.cursor()
@@ -18,7 +18,6 @@ class RegCarteraData():
             
         
 class RegFacturaData():
-    #funcion conecta a bd y registra un pago en base de datos cobranza
     def _registrar(self, info=Reg_Factura):
         self.db = con.Conexion().conectarBd()
         self.cursor= self.db.cursor()
@@ -31,3 +30,14 @@ class RegFacturaData():
         else:
             return False
         
+class RegPeriodoFactData():
+    def _registrar_p(self,info=RegPeriodoFacturacion):
+        self.db = con.Conexion().conectarBd()
+        self.cursor= self.db.cursor()
+        self.cursor.execute("""INSERT INTO reg_carga_cuotas values(null,'{}','{}','{}','{}')
+        """.format(info._tipoCartera,info._periodo,info._usuario,info._fechaReg))
+        self.db.commit()
+        if self.cursor.rowcount==1:
+            return True
+        else:
+            return False

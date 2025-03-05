@@ -14,7 +14,7 @@ from data.regareac import RegACData
 from data.regcliente import RegClienteData
 from data.regcontrato import RegContratoData
 from data.regctabancos import RegCtasBancoData
-from data.regfacturas import RegFacturaData
+from data.regfacturas import RegFacturaData, RegPeriodoFactData
 from data.reglocal import RegLocalData
 from data.regpagos import  RegCarteraData, RegCobranzaData
 from data.ubicaciones import  AreasData, ListaAreasData, ListaCuotasData, UbicacionesData
@@ -26,6 +26,7 @@ from model.regareac import RegAC
 from model.regcliente import RegCliente
 from model.regcontrato import RegContrato
 from model.reglocal import RegLocal
+from model.regperiodofacturacion import RegPeriodoFacturacion
 from model.user import Usuario 
 
 #import pandas as pd
@@ -865,7 +866,7 @@ class PantallaPrincipal():
             self.ffcm.txtImporte.setFocus()
                 
         else:
-            regpago=Reg_Factura(   
+            regfact=Reg_Factura(   
                 num_factura=self.ffcm.txtNumFact.text().upper(),
                 cliente=self.ppcm.cmbCliente.currentText(),
                 local_o_area=self.ffcm.txtLocal.text().upper(),
@@ -879,7 +880,7 @@ class PantallaPrincipal():
                 fecha_reg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
                 )
             objData=RegFacturaData()
-            if  objData._registrar(info=regpago):
+            if  objData._registrar(info=regfact):
                 m.setText("factura registrada con exito")
     
                 if self.ffcm.cmbTipoFact.currentIndex() == 2 or self.ffcm.cmbTipoFact.currentIndex() == 3:
@@ -1608,17 +1609,70 @@ class PantallaPrincipal():
         self.ffm=uic.loadUi("gui/formFactMasiva.ui")
         self.ffm.show()
         self.ffm.cmbTcartera.setCurrentIndex(0)
-        self.ffm.btnEjecutar.clicked.connect(self.carga_masiva)
+        self.ffm.btnEjecutar.clicked.connect(self.registro_masivo_cuotas_locales)
         self.ffm.btnSalir.clicked.connect(self.salir_form_cmasiva)
     
     
     
-    def carga_masiva(self):
+    # def carga_masiva(self):
+    #     m=QMessageBox()
+    #     m.setIcon(QMessageBox.Icon.Warning)
+    #     m.setWindowTitle("Carga Masiva de Cuotas")
+    #     m.setStandardButtons(QMessageBox.StandardButton.Ok)
+
+    #     if self.ffm.cmbTcartera.currentIndex()==0 :
+    #         m.setText("Selecciona una opcion")
+    #         self.ffm.cmbTcartera.setFocus()
+    #     elif self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd") =="":
+    #         m.setText("Fecha incorrecta")
+    #         self.ffm.fechaPeriodo.setFocus()
+    #     else:
+            
+        #     m.setText("Generacion masiva de facturas")
+        #     m.setInformativeText("Desea generar facturas masivas")
+        #     m.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        #     m.setDefaultButton(QMessageBox.StandardButton.No)
+        #     m.setIcon(QMessageBox.Icon.Question)
+
+        # respuesta=m.exec()
+        # if respuesta==QMessageBox.StandardButton.Yes:   
+        #     if self.ffm.cmbTcartera.currentIndex()==1:
+        #         self.registro_masivo_cuotas_locales()
+        #     else:
+        #         self.cuotas_areascomunes(self.ffm.cmbTcartera.currentText())
+                  
+    
+    # def cuotas_locales(self,tipoCartera):
+    #     fecha_periodo=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd")
+    #     search= PeriodosCargaData()
+    #     data=search.info_periodos_x_tipo_cartera(self.ffm.cmbTcartera.currentText())
+    #     find_periodo = None
+    #     for item in data:
+    #         if item[2] == fecha_periodo:
+    #             m=QMessageBox()
+    #             m.setText("Periodo ya Cargado")
+    #             m.exec()
+    #             break    
+    #         else:
+    #             self.registro_masivo_cuotas_locales()        
+            
+            
+        # if find_periodo == fecha_periodo:
+        #     m=QMessageBox()
+        #     m.setText("Periodo ya Cargado")
+        #     m.exec()
+
+        # else:
+        #     self.registro_masivo_cuotas_locales()
+            
+    
+    
+    
+    def registro_masivo_cuotas_locales(self):
         m=QMessageBox()
         m.setIcon(QMessageBox.Icon.Warning)
-        m.setWindowTitle("Carga Masiva de Cuotas")
+        m.setWindowTitle("Advertencia")
         m.setStandardButtons(QMessageBox.StandardButton.Ok)
-
         if self.ffm.cmbTcartera.currentIndex()==0 :
             m.setText("Selecciona una opcion")
             self.ffm.cmbTcartera.setFocus()
@@ -1626,43 +1680,162 @@ class PantallaPrincipal():
             m.setText("Fecha incorrecta")
             self.ffm.fechaPeriodo.setFocus()
         else:
-            fecha_periodo=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd")        
-            m.setText("Generacion masiva de facturas")
-            m.setInformativeText("Desea generar facturas masivas")
-            m.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-            m.setDefaultButton(QMessageBox.StandardButton.No)
-            m.setIcon(QMessageBox.Icon.Question)
-
-        respuesta=m.exec()
-        if respuesta==QMessageBox.StandardButton.Yes:   
-            if self.ffm.cmbTcartera.currentIndex()==1:
-                self.carga_cuotas_locales()
-                #self.consultar_periodo(self.ffm.cmbTcartera.currentText())
+            reg_Periodo=RegPeriodoFacturacion(
+                periodo=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
+                tipoCartera=self.ffm.cmbTcartera.currentText(),
+                usuario=self.pp.lblName_User.text(),
+                fechaReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                )
+            objData=PeriodosCargaData()
+            if objData._registrar_p(info=reg_Periodo):
+                m.setText("Periodo registrado con exito")
+                m.exec()
+                
+                search=UbicacionesData()
+                data=search.lista_ubicaciones()
+                p=self.ffm.fechaPeriodo.date().toString("MMM_yy")
+                for item in data:
+                    reg_facturas=Reg_Factura(
+                        num_factura=f"FACT-{p}",
+                        cliente=item[7],
+                        local_o_area=item[1],
+                        fecha_factura=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
+                        tipo_cuota="Cuota Mensual",
+                        importe_factura=item[3],
+                        tipo_factura="Ingreso",
+                        tipo_cartera="locales comerciales",
+                        status_pago=False,
+                        usuario=self.pp.lblName_User.text(),
+                        fecha_reg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                        )
+                    objData=RegFacturaData()
+                    if objData._registrar(info=reg_facturas):
+                        m.setText("facturas registradas con exito")
+                        
+                    reg_cartera=Reg_Cartera(
+                        local_o_area=item[1],
+                        clienteFact=item[7],
+                        tipoCartera="locales comerciales",
+                        tipoCuota="Cuota Mensual",
+                        tipo_factura="Ingreso",
+                        numFact=f"FACT-{p}",
+                        importeAdeudo=item[3],
+                        importePago=0,
+                        fPago_Cobro=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
+                        ctaBanco="",
+                        formaPago="",
+                        cheque="",
+                        numContrato="",
+                        statusPago=False,
+                        usuario=self.pp.lblName_User.text(),
+                        fechaReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+                        comentarios="Facturacion masiva " + self.ffm.fechaPeriodo.date().toString("yyyy-MM")         
+                        )
+                    objData=RegCarteraData()
+                    if  objData._registrar(info=reg_cartera):
+                        m.setText("cartera registrada con exito")
             else:
-                self.carga_cuotas_areascomunes()
-        else:
-            pass                
-    
-    def consultar_periodo(self,tipoCartera):
+                m.setText("Periodo ya registrado")
+        m.exec()    
+                
+            
+        # if find_periodo == fecha_periodo:
+        #     m=QMessageBox()
+        #     m.setText("Periodo ya Cargado" + find_periodo)
+        #     m.exec()
+
+            # else:
+            #     m.setText("periodo registrado"+ fecha_periodo)
+            # search=UbicacionesData()
+            # data=search.lista_ubicaciones()
+            
+            # for item in data:
+            #     regfact=Reg_Factura(
+            #         num_factura="",
+            #         cliente=item[7],
+            #         local_o_area=item[1],
+            #         fecha_factura=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
+            #         tipo_cuota="Cuota Mensual",
+            #         importe_factura=item[3],
+            #         tipo_factura="Ingreso",
+            #         tipo_cartera="locales comerciales",
+            #         status_pago=False,
+            #         usuario=self.pp.lblName_User.text(),
+            #         fecha_reg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+            #             )
+            #     objData=RegFacturaData()
+            #     if  objData._registrar(info=regfact):
+            #         m.setText("facturas registradas con exito")
+                    
+            #         regCartera=Reg_Cartera(
+            #             local_o_area=item[1],
+            #             clienteFact=item[7],
+            #             tipoCartera="locales comerciales",
+            #             tipoCuota="Cuota Mensual",
+            #             tipo_factura="Ingreso",
+            #             numFact="",
+            #             importeAdeudo=item[3],
+            #             importePago=0,
+            #             fPago_Cobro=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
+            #             ctaBanco="",
+            #             formaPago="",
+            #             cheque="",
+            #             numContrato="",
+            #             statusPago=False,
+            #             usuario=self.pp.lblName_User.text(),
+            #             fechaReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            #             comentarios="Carga Masiva" + self.ffm.fechaPeriodo.date().toString("yyyy-MM")            
+            #                 )
+            #         objData=RegCarteraData()
+            #         if  objData._registrar(info=regCartera):
+            #             m.setText("cartera registrada con exito")
+        
+            # regPeriodo=RegPeriodoFacturacion(
+            # periodo=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
+            #     tipoCartera="locales comerciales",
+            #     usuario=self.pp.lblName_User.text(),
+            #     fechaReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")        
+            #     )
+            # objData=RegPeriodoFactData()
+            # if objData._registrar_p(info=regPeriodo):
+            #     m.setText("periodo registrado con exito")        
+        
+        
+        
+     
+                
+       
+
+    def cuotas_areascomunes(self,tipoCartera):
+        fecha_periodo=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd")
         search= PeriodosCargaData()
         data=search.info_periodos_x_tipo_cartera(self.ffm.cmbTcartera.currentText())
-        print (data)
-     
-        
-    def carga_cuotas_locales(self):
-        fecha_periodo=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd")        
-        periodo=self.consultar_periodo(self.ffm.cmbTcartera.currentText())
-        if fecha_periodo == periodo :
+        find_periodo = None
+        for item in data:
+            if item== fecha_periodo:
+                find_periodo = item
+            break
+            
+        if find_periodo == fecha_periodo:
             m=QMessageBox()
             m.setText("Periodo ya Cargado")
             m.exec()
 
         else:
-            print("carga correcta locales comerciales")    
-    
-    def carga_cuotas_areascomunes(self):
-        print("areas comunes")    
+            print("carga correcta areas comunes")
         
+        
+      
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
     def salir_form_cmasiva(self):
         self.ffm.close()        
 
@@ -1672,7 +1845,7 @@ class PantallaPrincipal():
 
     def reiniciar_sistema(self):
         self.pp.close()
-        self.__init__()
+    
                 
     
     

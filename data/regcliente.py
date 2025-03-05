@@ -3,7 +3,6 @@ import conexion as con
 
 class RegClienteData():
     def registrar(self, info=RegCliente):
-        # Check if RFC or name already exists
         self.db = con.Conexion().conectarBd()
         self.cursor = self.db.cursor()
         self.cursor.execute("SELECT COUNT(*) FROM clientes WHERE rfc = '{}' OR nombre_o_razon_social = '{}'".format(info._rfc, info._nombre))

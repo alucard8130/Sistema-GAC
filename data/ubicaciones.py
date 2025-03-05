@@ -1,7 +1,7 @@
 
 import conexion as con
 
-#
+
 class UbicacionesData():
     def lista_ubicaciones(self):
         self.db = con.Conexion().conectarBd()
