@@ -8,7 +8,7 @@ class PeriodosCargaData():
         self.db = con.Conexion().conectarBd()
         self.cursor= self.db.cursor()
         query= self.cursor.execute("SELECT periodo FROM reg_carga_cuotas WHERE tipo_cartera='{}'".format(tipoCartera))
-        serch_info=query.fetchall()
+        serch_info=query.fetchone()
         self.db.close()    
         return(serch_info)
         

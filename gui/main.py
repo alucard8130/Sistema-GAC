@@ -1612,6 +1612,7 @@ class PantallaPrincipal():
         self.ffm.btnSalir.clicked.connect(self.salir_form_cmasiva)
     
     
+    
     def carga_masiva(self):
         m=QMessageBox()
         m.setIcon(QMessageBox.Icon.Warning)
@@ -1636,6 +1637,7 @@ class PantallaPrincipal():
         if respuesta==QMessageBox.StandardButton.Yes:   
             if self.ffm.cmbTcartera.currentIndex()==1:
                 self.carga_cuotas_locales()
+                #self.consultar_periodo(self.ffm.cmbTcartera.currentText())
             else:
                 self.carga_cuotas_areascomunes()
         else:
@@ -1644,21 +1646,18 @@ class PantallaPrincipal():
     def consultar_periodo(self,tipoCartera):
         search= PeriodosCargaData()
         data=search.info_periodos_x_tipo_cartera(self.ffm.cmbTcartera.currentText())
-        if data==[]:
-           pass
-        else:
-            data
+        print (data)
      
         
     def carga_cuotas_locales(self):
+        fecha_periodo=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd")        
         periodo=self.consultar_periodo(self.ffm.cmbTcartera.currentText())
-        if self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd") == periodo :
+        if fecha_periodo == periodo :
             m=QMessageBox()
             m.setText("Periodo ya Cargado")
             m.exec()
-        
+
         else:
-        
             print("carga correcta locales comerciales")    
     
     def carga_cuotas_areascomunes(self):
