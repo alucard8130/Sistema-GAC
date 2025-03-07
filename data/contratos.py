@@ -1,9 +1,6 @@
-
 import conexion as con
 
-#
 class ContratosData():
-    #
     def lista_contratos(self):
         self.db = con.Conexion().conectarBd()
         self.cursor= self.db.cursor()
