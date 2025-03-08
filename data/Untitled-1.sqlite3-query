@@ -1,6 +1,0 @@
--- database: ../gac.db
-
-SELECT * FROM contratos;
-UPDATE contratos
-SET cliente = 'TIENDAS COMERCIAL',area_comun='45-P'
-WHERE num_contrato = 'CONT-0001';

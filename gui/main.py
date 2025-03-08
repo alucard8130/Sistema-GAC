@@ -2,7 +2,7 @@ import datetime
 import csv
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMessageBox, QTableWidgetItem, QFileDialog, QLineEdit
-from PyQt6.QtCore import QDate
+from PyQt6.QtPrintSupport import QPrinter, QPrintDialog
 from data import ctasbancos
 from data.cartera import CarteraDataAC, CarteraDataCM
 from data.clientes import BuscarCliente, ClientesData
@@ -28,14 +28,14 @@ from model.regcontrato import RegContrato
 from model.reglocal import RegLocal
 from model.regperiodofacturacion import RegPeriodoFacturacion
 from model.user import Usuario 
+import xlsxwriter
 
-#import pandas as pd
 
-current_datetime = datetime.datetime.now()
 
 ###############################################PANTALLA PRINCIPAL############################################
 
-class PantallaPrincipal():
+current_datetime = datetime.datetime.now()
+class PantallaPrincipal():  
     def __init__(self):
         self.pp = uic.loadUi("gui/formMain.ui")
         self.pp.show()
@@ -698,6 +698,7 @@ class PantallaPrincipal():
         self.ppcm.btnBuscar.clicked.connect(self.mostrar_informacionCM)
         self.ppcm.btnRegCob.clicked.connect(self.validar_campos_PPCM)
         self.ppcm.btnRegFact.clicked.connect(self.abrir_form_facturacionCM)
+        self.ppcm.btnEdoCta.clicked.connect(self.exportar_info_a_excelCM)
         self.ppcm.btnSalir.clicked.connect(self.salir_form_PPCM)
                   
     def set_cmb_locales_ppcm(self):
@@ -957,6 +958,7 @@ class PantallaPrincipal():
         self.ppac.btnBuscar.clicked.connect(self.mostrar_informacionAC)
         self.ppac.btnRegCob.clicked.connect(self.validar_campos_PPAC)
         self.ppac.btnRegFact.clicked.connect(self.abrir_form_facturacionAC)
+        self.ppac.btnEdoCta.clicked.connect(self.exportar_info_a_excelAC)
         self.ppac.btnSalir.clicked.connect(self.salir_form_PPAC)
   
   
@@ -1591,8 +1593,37 @@ class PantallaPrincipal():
                     self.ppcm.tblCarteraCM.setItem(fila,8,QTableWidgetItem(item[7]))
                     self.ppcm.tblCarteraCM.setItem(fila,9,QTableWidgetItem(item[8]))
                     fila+=1
-                     
-        
+                    
+    def exportar_info_a_excelCM(self):
+        file_dialog = QFileDialog()
+        file_path, _ = file_dialog.getSaveFileName(self.pp, "Guardar archivo", "", "Archivos Excel (*.xlsx);;Todos los archivos (*)")
+                        
+        if file_path:
+            try:                            
+                workbook = xlsxwriter.Workbook(file_path)
+                worksheet = workbook.add_worksheet()
+                                
+                headers = ["tipo_cuota", "num_fact", "importe_adeudo", "importe_pago", "importe_saldo", "fecha", "forma_pago", "num_cheque", "cta_banco","status"]
+                for col_num, header in enumerate(headers):
+                    worksheet.write(0, col_num, header)           
+                    for row_num in range(self.ppcm.tblCarteraCM.rowCount()):
+                        for col_num in range(self.ppcm.tblCarteraCM.columnCount()):
+                            worksheet.write(row_num + 1, col_num, self.ppcm.tblCarteraCM.item(row_num, col_num).text())
+                                
+                workbook.close()               
+                m = QMessageBox()
+                m.setIcon(QMessageBox.Icon.Information)
+                m.setWindowTitle("Exportar a Excel")
+                m.setText("Datos exportados exitosamente a Excel")
+                m.exec()
+            except Exception as e:
+                m = QMessageBox()
+                m.setIcon(QMessageBox.Icon.Critical)
+                m.setWindowTitle("Error")
+                m.setText(f"Error al exportar a Excel: {e}")
+                m.exec()
+
+                
 ##############################TABLA DE INFORMACION AREAS COMUNES############################################        
 
     def mostrar_informacionAC(self):
@@ -1631,7 +1662,37 @@ class PantallaPrincipal():
                      self.ppac.tblCarteraAC.setItem(fila,9,QTableWidgetItem(item[9]))   
                      fila+=1
 
-
+    def exportar_info_a_excelAC(self):
+        file_dialog = QFileDialog()
+        file_path, _ = file_dialog.getSaveFileName(self.pp, "Guardar archivo", "", "Archivos Excel (*.xlsx);;Todos los archivos (*)")
+                        
+        if file_path:
+            try:                            
+                workbook = xlsxwriter.Workbook(file_path)
+                worksheet = workbook.add_worksheet()
+                                
+                headers = ["contrato", "tipo_cuota","num_fact", "importe_adeudo", "importe_pago", "importe_saldo", "fecha", "forma_pago", "cta_banco","status"]
+                for col_num, header in enumerate(headers):
+                    worksheet.write(0, col_num, header)           
+                    for row_num in range(self.ppac.tblCarteraAC.rowCount()):
+                        for col_num in range(self.ppac.tblCarteraAC.columnCount()):
+                            worksheet.write(row_num + 1, col_num, self.ppac.tblCarteraAC.item(row_num, col_num).text())
+                                
+                workbook.close()               
+                m = QMessageBox()
+                m.setIcon(QMessageBox.Icon.Information)
+                m.setWindowTitle("Exportar a Excel")
+                m.setText("Datos exportados exitosamente a Excel")
+                m.exec()
+            except Exception as e:
+                m = QMessageBox()
+                m.setIcon(QMessageBox.Icon.Critical)
+                m.setWindowTitle("Error")
+                m.setText(f"Error al exportar a Excel: {e}")
+                m.exec()
+        
+        
+        
 ########################################CARGA MASIVA DE CUOTAS###########################################################
     def abrir_form_cmasiva(self):
         self.ffm=uic.loadUi("gui/formFactMasiva.ui")
@@ -1811,27 +1872,9 @@ class PantallaPrincipal():
     
     
     
-    
-    
- 
-    
- 
 
-    # def exportar_tabla_a_excel(tabla, nombre_archivo):
-    #     datos = []
-    #     for fila in range(tabla.rowCount()):
-    #         fila_datos = []
-    #         for columna in range(tabla.columnCount()):
-    #             item = tabla.item(fila, columna)
-    #             fila_datos.append(item.text() if item is not None else "")
-    #         datos.append(fila_datos)
-        
-    #     df = pd.DataFrame(datos, columns=[tabla.horizontalHeaderItem(i).text() for i in range(tabla.columnCount())])
-    #     df.to_excel(nombre_archivo, index=False)
 
-    # Ejemplo de uso:
-    # exportar_tabla_a_excel(self.ppcm.tblCarteraCM, "cartera_cm.xlsx")
-    # exportar_tabla_a_excel(self.ppac.tblCarteraAC, "cartera_ac.xlsx")
+    
 
 
 
