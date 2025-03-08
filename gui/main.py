@@ -494,6 +494,7 @@ class PantallaPrincipal():
         self.fal=uic.loadUi("gui/formLocales.ui")
         self.fal.show()
         self.fal.txtLocal.setText("L-")
+        self.set_cmb_clientes()
         self.fal.btnGuardar.clicked.connect(self.registrar_local)
         self.fal.btnSalir.clicked.connect(self.salir_form_local) 
             
@@ -519,11 +520,11 @@ class PantallaPrincipal():
                 m.setText("Captura solo numeros")
                 self.fal.txtSuperficie.setText('0.00')
                 self.fal.txtSuperficie.setFocus()    
-                            
-                
-            elif self.fal.txtCliente.text()=="":
-                m.setText("Capture Cliente Facturacion")
-                self.fal.txtCliente.setFocus()
+                                
+            #elif self.fal.txtCliente.text()=="":
+            elif self.fal.cmbClientes.currentIndex()==0:
+                m.setText("Selecciona una opcion")
+                self.fal.cmbClientes.setFocus()
         
             elif self.fal.txtGiro.text()=="":
                 m.setText("Capture Giro del Local")
@@ -555,7 +556,7 @@ class PantallaPrincipal():
                     dg=0,
                     nom_propietario=self.fal.txtPropietario.text().upper(),
                     rfc_propietario=self.fal.txtRFC_p.text().upper(),
-                    cliente=self.fal.txtCliente.text().upper(),
+                    cliente=self.fal.cmbClientes.currentText().upper(),
                     giro=self.fal.txtGiro.text().upper(),
                     status=False,
                     usuario=self.pp.lblName_User.text(),
@@ -569,14 +570,20 @@ class PantallaPrincipal():
                     m.setText("El Local  " + self.fal.txtLocal.text() + "   ya esta registrado")
                     self.limpiar_campos_fal()  
             m.exec()
-            
+    
+    def set_cmb_clientes(self):
+        obj=ClientesData()
+        datos=obj.lista_clientes()
+        for item in datos:
+            self.fal.cmbClientes.addItem(item[1])
+          
     def limpiar_campos_fal(self):
         self.fal.txtLocal.setText("")
         self.fal.txtSuperficie.setText("")
         self.fal.txtCuota.setText("")
         self.fal.txtPropietario.setText("")
         self.fal.txtRFC_p.setText("")
-        self.fal.txtCliente.setText("")
+        self.fal.cmbClientes.setCurrentIndex(0)
         self.fal.txtGiro.setText("")        
      
     def salir_form_local(self):
@@ -586,8 +593,15 @@ class PantallaPrincipal():
     def abrir_form_alta_AC(self):
         self.fac=uic.loadUi("gui/formAreasComunes.ui")
         self.fac.show()
+        self.set_cmb_cliente()
         self.fac.btnGuardar.clicked.connect(self.registrar_area)
         self.fac.btnSalir.clicked.connect(self.salir_form_area)
+        
+    def set_cmb_cliente(self):
+        obj=ClientesData()
+        datos=obj.lista_clientes()
+        for item in datos:
+            self.fac.cmbClientes.addItem(item[1])    
  
     def registrar_area(self):
         m=QMessageBox()
@@ -612,9 +626,10 @@ class PantallaPrincipal():
             self.fac.txtSuperficie.setText('0.00')
             self.fac.txtSuperficie.setFocus()    
                         
-        elif self.fac.txtCliente.text()=="":
-            m.setText("Capture Cliente Facturacion")
-            self.fac.txtCliente.setFocus()
+        #elif self.fac.txtCliente.text()=="":
+        elif self.fac.cmbClientes.currentIndex()==0:
+            m.setText("Seleccione una opcion")
+            self.fac.cmbClientes.setFocus()
     
         elif self.fac.txtGiro.text()=="":
             m.setText("Capture Giro del Area Comun")
@@ -640,7 +655,7 @@ class PantallaPrincipal():
         else:
             reg_area=RegAC(
                 num_area=self.fac.txtArea.text().upper(),
-                cliente_fact=self.fac.txtCliente.text().upper(),
+                cliente_fact=self.fac.cmbClientes.currentText().upper(),
                 cuota=self.fac.txtCuota.text(),
                 dg=self.fac.txtDG.text(),
                 tipo_area=self.fac.cmbTipoArea.currentText(),
@@ -665,7 +680,7 @@ class PantallaPrincipal():
         self.fac.txtArea.setText("")
         self.fac.txtSuperficie.setText("")
         self.fac.txtCuota.setText("")
-        self.fac.txtCliente.setText("")
+        self.fac.cmbClientes.setCurrentIndex(0)
         self.fac.txtGiro.setText("")  
         self.fac.txtDG.setText("") 
         self.fac.cmbTipoArea.setCurrentIndex(0)    
@@ -835,6 +850,7 @@ class PantallaPrincipal():
         else:    
             self.ffcm=uic.loadUi("gui/formRegFacturasCM.ui")
             self.ffcm.show()
+            self.ffcm.txtNumFact.setText("F-")
             self.ffcm.txtLocal.setText(self.ppcm.cmblocal.currentText())
             self.ffcm.btnRegistrar.clicked.connect(self.registrar_facturacionCM) 
             self.ffcm.btnSalir.clicked.connect(self.salir_form_facturacionCM)   
@@ -1103,6 +1119,7 @@ class PantallaPrincipal():
         else:
             self.ffac=uic.loadUi("gui/formRegFacturasAC.ui")
             self.ffac.show()
+            self.ffac.txtNumFact.setText("F-")
             self.ffac.txtAreaC.setText(self.ppac.cmbAreaC.currentText())
             self.ffac.btnRegistrar.clicked.connect(self.registrar_facturacionAC) 
             self.ffac.btnSalir.clicked.connect(self.salir_form_facturacionAC)   
@@ -1351,7 +1368,7 @@ class PantallaPrincipal():
         self.fcon=uic.loadUi("gui/formContratos.ui")
         self.fcon.show()
         self.set_cmb_ac()
-        self.set_cmb_cliente()
+        self.set_cmb_clientes_c()
         self.numeros_contratos()
         self.fcon.checkBActivo.setChecked(True)
         self.fcon.cmbAreaComun.currentIndexChanged.connect(self.set_cuota)
@@ -1369,10 +1386,11 @@ class PantallaPrincipal():
         datos=obj.lista_cuotas_x_area(self.fcon.cmbAreaComun.currentText())
         self.fcon.txtCuota.setText("")
         for item in datos:
-            self.fcon.txtCuota.setText(f"{item[3]:,.2f}")
-            self.fcon.txtDG.setText(f"{item[4]:,.2f}")
+            #self.fcon.txtCuota.setText(f"{item[3]:,.2f}")
+            self.fcon.txtCuota.setText(str(item[3]))
+            self.fcon.txtDG.setText(str(item[4]))
             
-    def set_cmb_cliente(self):
+    def set_cmb_clientes_c(self):
         search=ClientesData()
         data=search.lista_clientes()
         for item in data:
@@ -1407,14 +1425,14 @@ class PantallaPrincipal():
         else:       
             regContrato=RegContrato(
                 n_contrato=self.fcon.txtNumContrato.text(),
-                c_facturacion=self.fcon.cmbCliente.currentText(),
-                n_area=self.fcon.cmbAreaComun.currentText(),
-                f_inicio=self.fcon.dateInicial.date().toString("yyyy-MM-dd"),
-                f_fin=self.fcon.dateFinal.date().toString("yyyy-MM-dd"),
+                c_facturacion=cliente,
+                n_area=area_comun,
+                f_inicio=fecha_ini,
+                f_fin=fecha_fin,
                 m_cuota=self.fcon.txtCuota.text(),
                 m_dg=self.fcon.txtDG.text(),
                 t_contrato=self.fcon.cmbTipoContrato.currentText(),
-                s_contrato="activo",
+                s_contrato=True,
                 s_vigencia=self.vigencia(),
                 r_usuario=self.pp.lblName_User.text(),
                 f_registro=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -1422,14 +1440,14 @@ class PantallaPrincipal():
             objData=RegContratoData()
             if objData.obtener_contrato_x_fechaInio_fechaFinal(fecha_ini,fecha_fin,cliente):
                 m.setText("el area comun:  "  + area_comun +  "   ya tiene un contrato en esas fechas")
-                #self.limpiar_campos()
+                self.limpiar_campos_fcon()
             else:
                 if  objData.registrar(info=regContrato):
                     m.setText("Contrato registrado con exito")
-                #self.limpiar_campos()
+                    self.limpiar_campos_fcon()
                 else:
                     m.setText("Contrato no registrado")
-                #self.limpiar_campos()
+                    self.limpiar_campos_fcon()
         m.exec()
     
     def vigencia(self):
@@ -1443,12 +1461,27 @@ class PantallaPrincipal():
             objData = RegContratoData()
             last_contract = objData.obtener_ultimo_contrato()
             if last_contract:
-                last_number = int(str(last_contract[0][0]).split('-')[-1])
+                last_contract_number = str(last_contract[0][0])
+                if '-' in last_contract_number:
+                    last_number = int(last_contract_number.split('-')[1])
+                else:
+                    last_number = int(last_contract_number)
                 new_number = last_number + 1
-                new_contract_number = f"CONT-{new_number:04d}"  #04d = 0001
+                new_contract_number = f"C-{new_number:04d}"  #04d = 0001
                 self.fcon.txtNumContrato.setText(new_contract_number)
             else:
                 pass
+            
+    def limpiar_campos_fcon(self):
+        self.fcon.cmbAreaComun.setCurrentIndex(0)
+        self.fcon.cmbCliente.setCurrentIndex(0)
+        self.fcon.cmbTipoContrato.setCurrentIndex(0)
+        #self.fcon.dateInicial.setDate(current_datetime)
+        #self.fcon.dateFinal.setDate(current_datetime)
+        self.fcon.txtCuota.setText("")
+        self.fcon.txtDG.setText("")
+        #self.fcon.checkBActivo.setChecked(True)
+        #self.fcon.checkBVencido.setChecked(False)        
             
     def salir_form_contratos(self):
         self.fcon.close()        
@@ -1629,8 +1662,7 @@ class PantallaPrincipal():
                     
             elif self.ffm.cmbTcartera.currentIndex()==2 :
                 self.registro_masivo_cuotas_areas()    
-        
-       
+           
     
     def registro_masivo_cuotas_locales(self):
         m=QMessageBox()  
@@ -1653,10 +1685,10 @@ class PantallaPrincipal():
                  
                 search=UbicacionesData()
                 data=search.lista_ubicaciones()
-                p=self.ffm.fechaPeriodo.date().toString("MMM_yy")
+                p=self.ffm.fechaPeriodo.date().toString("MMyy")
                 for item in data:
                     reg_facturas=Reg_Factura(
-                        num_factura=f"FACT-{p}",
+                        num_factura=f"F-{p}",
                         cliente=item[7],
                         local_o_area=item[1],
                         fecha_factura=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
@@ -1678,7 +1710,7 @@ class PantallaPrincipal():
                         tipoCartera="locales comerciales",
                         tipoCuota="Cuota Mensual",
                         tipo_factura="Ingreso",
-                        numFact=f"FACT-{p}",
+                        numFact=f"F-{p}",
                         importeAdeudo=item[3],
                         importePago=0,
                         fPago_Cobro=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
@@ -1727,11 +1759,11 @@ class PantallaPrincipal():
                 for item in data:
                     reg_facturas=Reg_Factura(
                         num_factura=f"FACT-{p}",
-                        cliente=item[7],
-                        local_o_area=item[1],
+                        cliente=item[2],
+                        local_o_area=item[3],
                         fecha_factura=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
                         tipo_cuota="Cuota Mensual",
-                        importe_factura=item[3],
+                        importe_factura=item[6],
                         tipo_factura="Ingreso",
                         tipo_cartera="areas comunes",
                         status_pago=False,
@@ -1743,19 +1775,19 @@ class PantallaPrincipal():
                         m.setText("facturas registradas con exito")
                     
                     reg_cartera=Reg_Cartera(
-                        local_o_area=item[1],
-                        clienteFact=item[7],
+                        local_o_area=item[3],
+                        clienteFact=item[2],
                         tipoCartera="areas comunes",
                         tipoCuota="Cuota Mensual",
                         tipo_factura="Ingreso",
                         numFact=f"FACT-{p}",
-                        importeAdeudo=item[3],
+                        importeAdeudo=item[6],
                         importePago=0,
                         fPago_Cobro=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
                         ctaBanco="",
                         formaPago="",
                         cheque="",
-                        numContrato=self.numeros_contratos(),  #pendinte validar que genere los contratos
+                        numContrato=item[1],  #pendinte validar que genere los contratos
                         statusPago=False,
                         usuario=self.pp.lblName_User.text(),
                         fechaReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S"),
@@ -1770,23 +1802,10 @@ class PantallaPrincipal():
         elif res==QMessageBox.StandardButton.Cancel:
             m.setText("Carga Cancelada")        
         m.exec()
-      
-        
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     def salir_form_cmasiva(self):
         self.ffm.close()        
-
-
-
-
 
     def reiniciar_sistema(self):
         self.pp.close()

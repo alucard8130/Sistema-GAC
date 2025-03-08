@@ -336,7 +336,7 @@ border-radius:5px;</string>
      <string>Superficie</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtCliente">
+   <widget class="QComboBox" name="cmbClientes">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -347,13 +347,29 @@ border-radius:5px;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:5px;
-</string>
+border-radius:5px;</string>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
-    </property>
+    <item>
+     <property name="text">
+      <string>---selecciona una opccion---</string>
+     </property>
+    </item>
    </widget>
+   <zorder>txtLocal</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_3</zorder>
+   <zorder>groupBoxStatus</zorder>
+   <zorder>label_5</zorder>
+   <zorder>label_7</zorder>
+   <zorder>label_9</zorder>
+   <zorder>txtSuperficie</zorder>
+   <zorder>txtCuota</zorder>
+   <zorder>txtRFC_p</zorder>
+   <zorder>txtGiro</zorder>
+   <zorder>label_10</zorder>
+   <zorder>label_11</zorder>
+   <zorder>cmbClientes</zorder>
+   <zorder>txtPropietario</zorder>
   </widget>
   <widget class="QFrame" name="frame_3">
    <property name="geometry">
@@ -424,57 +440,6 @@ border-radius:10px;
      <size>
       <width>40</width>
       <height>40</height>
-     </size>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnEditar">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>10</y>
-      <width>150</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>150</width>
-      <height>100</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Comic Sans MS</family>
-      <pointsize>12</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::LayoutDirection::LeftToRight</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(8, 19, 95);
-color: rgb(255, 255, 255);
-border-radius:10px;
-</string>
-    </property>
-    <property name="text">
-     <string>Editar</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../iconos/Custom-Icon-Design-Pretty-Office-9-Edit-file.256.png</normaloff>../iconos/Custom-Icon-Design-Pretty-Office-9-Edit-file.256.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>30</width>
-      <height>30</height>
      </size>
     </property>
     <property name="flat">

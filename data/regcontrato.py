@@ -23,15 +23,16 @@ class RegContratoData():
     def obtener_ultimo_contrato(self):
         self.db = con.Conexion().conectarBd()
         self.cursor= self.db.cursor()
-        query= self.cursor.execute("SELECT * FROM contratos order by num_contrato desc limit 1")
+        query= self.cursor.execute("SELECT * FROM contratos order by id desc limit 1")
         serch_info=query.fetchall()
         self.db.close()    
         return(serch_info)
     
+    
     def obtener_contrato_x_fechaInio_fechaFinal(self, fechaInicio, fechaFin,cliente):
         self.db = con.Conexion().conectarBd()
         self.cursor= self.db.cursor()
-        query= self.cursor.execute("SELECT area_comun FROM contratos WHERE fecha_inicio = '{}' AND fecha_fin = '{}' AND cliente = '{}'".format(fechaInicio, fechaFin, cliente))
+        query= self.cursor.execute("SELECT area_comun FROM contratos WHERE fecha_inicio <= '{}' AND fecha_fin >= '{}' AND cliente = '{}'".format(fechaFin, fechaInicio, cliente))
         result=query.fetchone()
         self.db.close()    
         if result is None:

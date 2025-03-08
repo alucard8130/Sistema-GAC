@@ -256,23 +256,6 @@ border-radius:5px;</string>
      <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtCliente">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>40</y>
-      <width>251</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:5px;</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="txtGiro">
     <property name="geometry">
      <rect>
@@ -397,6 +380,25 @@ border-radius:5px;
     <property name="alignment">
      <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
     </property>
+   </widget>
+   <widget class="QComboBox" name="cmbClientes">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>40</y>
+      <width>251</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:5px;</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>---selecciona una opcion---</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QFrame" name="frame_3">
