@@ -135,7 +135,7 @@ color: rgb(255, 78, 2);
 color: rgb(216, 224, 236);</string>
     </property>
     <property name="text">
-     <string> FORMULARIO REGISTRO COBRANZA</string>
+     <string> COBRANZA CUOTAS AREAS COMUNES</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
@@ -190,22 +190,27 @@ border-radius:5px;</string>
     </item>
     <item>
      <property name="text">
-      <string>Cuota Mensual</string>
+      <string>pago mensual</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Cuota Deposito Garantia</string>
+      <string>pago atrasado</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Cuota Anticipada</string>
+      <string>pago anticipado</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Otras Cuotas</string>
+      <string>pago no identificado</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>pago parcial o a cuenta</string>
      </property>
     </item>
    </widget>
@@ -253,7 +258,7 @@ border-radius:5px;</string>
      <rect>
       <x>200</x>
       <y>180</y>
-      <width>211</width>
+      <width>171</width>
       <height>30</height>
      </rect>
     </property>
@@ -263,7 +268,7 @@ border-radius:5px;</string>
     </property>
     <item>
      <property name="text">
-      <string>---selecciona una opcion-----</string>
+      <string>--selecciona una opcion--</string>
      </property>
     </item>
     <item>
@@ -283,7 +288,7 @@ border-radius:5px;</string>
     </item>
     <item>
      <property name="text">
-      <string>Banco Interno</string>
+      <string>Transferencia Interna</string>
      </property>
     </item>
    </widget>
@@ -358,9 +363,9 @@ border-radius:5px;</string>
    <widget class="QComboBox" name="cmbCtaBancaria">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>440</x>
       <y>180</y>
-      <width>151</width>
+      <width>161</width>
       <height>30</height>
      </rect>
     </property>
@@ -370,7 +375,7 @@ border-radius:5px;</string>
     </property>
     <item>
      <property name="text">
-      <string>-seleccione una opcion</string>
+      <string>--seleccione una opcion--</string>
      </property>
     </item>
    </widget>
@@ -384,13 +389,13 @@ border-radius:5px;</string>
      </rect>
     </property>
     <property name="text">
-     <string>Tipo Cuota*</string>
+     <string>Tipo Pago*</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>450</x>
       <y>160</y>
       <width>111</width>
       <height>16</height>

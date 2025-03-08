@@ -1,0 +1,48 @@
+bd reg_gastos
+id, 
+proveedor_name, 
+tipo_gasto: conservacion, publicidad, eventos, nomina, operacion, administrativo, estacionamiento, oficina, 
+impuestos,seguridad social, asamblea, comite, extraordinario, otro 
+descripcion_gasto,
+forma_pago,
+num_cheque,
+importe_pago,
+subtotal,
+iva,
+iva_ret,
+isr_ret,
+comentarios,
+usuario,
+fecha_reg,
+
+
+bd proveedores
+id,
+nombre_razon,
+RFC,
+CURP,
+tipo_servicio,
+cuenta_bancaria,
+num_cel,
+email,
+usuario,
+fecha_reg
+
+bd empleados
+id, nombre1, nombre2, apellido1,apellido2,RFC,CURP,fecha_nacimiento, NSS,email, domicilio, puesto, 
+departamento,fecha_ingreso, salario_diario, sueldo_mensual,antiguedad,usuario,fecha_reg  
+
+
+bd otros_ingresos
+id,
+cliente,
+tipo_ingreso: intereses inversiones, utilidad cambiaria, perdida cambiaria, venta activos, venta carton, 
+descripcion,
+importe_total,
+forma_pago,
+cta_bancaria,
+fecha_pago,
+usuario,
+fecha_registro,
+comentarios,
+
