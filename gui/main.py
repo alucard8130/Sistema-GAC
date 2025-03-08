@@ -1750,10 +1750,10 @@ class PantallaPrincipal():
                 
                 search=ContratosData()
                 data=search.lista_contratos()
-                p=self.ffm.fechaPeriodo.date().toString("MMM_yy")
+                p=self.ffm.fechaPeriodo.date().toString("MMyy")
                 for item in data:
                     reg_facturas=Reg_Factura(
-                        num_factura=f"FACT-{p}",
+                        num_factura=f"F-{p}",
                         cliente=item[2],
                         local_o_area=item[3],
                         fecha_factura=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
@@ -1775,14 +1775,14 @@ class PantallaPrincipal():
                         tipoCartera="areas comunes",
                         tipoCuota="Cuota Mensual",
                         tipo_factura="Ingreso",
-                        numFact=f"FACT-{p}",
+                        numFact=f"F-{p}",
                         importeAdeudo=item[6],
                         importePago=0,
                         fPago_Cobro=self.ffm.fechaPeriodo.date().toString("yyyy-MM-dd"),
                         ctaBanco="",
                         formaPago="",
                         cheque="",
-                        numContrato=item[1],  #pendinte validar que genere los contratos
+                        numContrato=item[1],  
                         statusPago=False,
                         usuario=self.pp.lblName_User.text(),
                         fechaReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S"),
