@@ -17,7 +17,7 @@ class AreasData():
     def lista_areas_x_contrato(self,contrato):
         self.db = con.Conexion().conectarBd()
         self.cursor= self.db.cursor()
-        query= self.cursor.execute("""SELECT * FROM areas_comunes WHERE num_contrato='{}' order by num_area""".format(contrato))       
+        query= self.cursor.execute("""SELECT * FROM contratos WHERE num_contrato='{}'""".format(contrato))       
         serch_info=query.fetchall()
         self.db.close()    
         return(serch_info)

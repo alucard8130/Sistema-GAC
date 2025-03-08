@@ -982,7 +982,7 @@ class PantallaPrincipal():
         self.ppac.tblCarteraAC.clearContents()
         self.ppac.txtSaldo.setText("")   
         for item in data:
-            self.ppac.cmbAreaC.addItem(item[1])
+            self.ppac.cmbAreaC.addItem(item[3])
             self.ppac.cmbCliente.addItem(item[2])
                  
     
@@ -1503,7 +1503,6 @@ class PantallaPrincipal():
         for item in data:
             self.fbc.cmbContrato.addItem(item[1])   
      
-             
     def get_info_contrato(self,contrato):
         search=RegContratoData()
         data=search.info_contratos(self.fbc.cmbContrato.currentText())
@@ -1603,7 +1602,7 @@ class PantallaPrincipal():
             self.ppac.cmbContrato.setFocus()
         else:    
             search=CarteraDataAC()
-            data=search.buscar_info_area(self.ppac.cmbAreaC.currentText())
+            data=search.buscar_info_area_x_contrato(self.ppac.cmbContrato.currentText())
             fila=0
             saldo=0
             if data==[]:
@@ -1611,7 +1610,7 @@ class PantallaPrincipal():
                 m.setText("No hay informacion")
                 m.exec()
                 self.ppac.tblCarteraAC.clearContents()
-                self.ppac.cmbAreaC.setFocus()
+                self.ppac.cmbContrato.setFocus()
             else:
                 self.ppac.tblCarteraAC.setRowCount(len(data))
                 for item in data:
@@ -1631,11 +1630,6 @@ class PantallaPrincipal():
                      self.ppac.tblCarteraAC.setItem(fila,9,QTableWidgetItem(item[9]))   
                      fila+=1
 
-
-                    
-
-                    # Add this line to connect the reiniciar_sistema method to a button or action
-                    # self.pp.actionReiniciar.triggered.connect(self.reiniciar_sistema)
 
 ########################################CARGA MASIVA DE CUOTAS###########################################################
     def abrir_form_cmasiva(self):
