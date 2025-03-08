@@ -282,8 +282,8 @@ class Conexion():
             isr_ret FLOAT,
             fecha_gasto TEXT,
             usuario TEXT,
-            comentarios TEXT),
-            fecha_reg TEXT;
+            comentarios TEXT,
+            fecha_reg TEXT);
             """
             self.conexion.execute(query)
         except sqlite3.Error as e:
@@ -302,8 +302,8 @@ class Conexion():
             direccion TEXT,
             telefono TEXT,
             email TEXT,
-            usuario TEXT),
-            fecha_reg TEXT;
+            usuario TEXT,
+            fecha_reg TEXT);
             """
             self.conexion.execute(query)
         except sqlite3.Error as e:
