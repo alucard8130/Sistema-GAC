@@ -35,10 +35,10 @@ class Conexion():
             self.create_table_contratos()
             self.create_table_cobranza()
             self.create_table_ctas_bancarias()
-            self.create_table_reg_carga_cuotas() 
-            #self.create_table_empleados()
-            #self.create_table_proveedores()
-            #self.create_table_gastos()
+            self.create_table_reg_carga_cuotas()
+            self.create_table_gastos()
+            self.create_table_proveedores() 
+            self.create_table_empleados()
             #self.create_table_otros_ingresos()
             
             
@@ -264,7 +264,79 @@ class Conexion():
             self.conexion.execute(query)
         except sqlite3.Error as e:
             print(e)    
-        
+    
+    def create_table_gastos(self):
+        try:
+            query = """
+            CREATE TABLE IF NOT EXISTS gastos(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            proveedor_name TEXT,
+            tipo_gasto TEXT,
+            descripcion_gasto TEXT,
+            forma_pago TEXT,
+            num_cheque TEXT,
+            importe_pago FLOAT,
+            subtotal as (importe_pago / 1.16) VIRTUAL,
+            iva as (subtotal * 0.16) VIRTUAL,
+            iva_ret FLOAT,
+            isr_ret FLOAT,
+            fecha_gasto TEXT,
+            usuario TEXT,
+            comentarios TEXT),
+            fecha_reg TEXT;
+            """
+            self.conexion.execute(query)
+        except sqlite3.Error as e:
+            print(e)    
+    
+    def create_table_proveedores(self):
+        try:
+            query = """
+            CREATE TABLE IF NOT EXISTS proveedores(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre_razon TEXT,
+            rfc TEXT,
+            curp TEXT,
+            tipo_servicio TEXT,
+            cuenta_banco TEXT,
+            direccion TEXT,
+            telefono TEXT,
+            email TEXT,
+            usuario TEXT),
+            fecha_reg TEXT;
+            """
+            self.conexion.execute(query)
+        except sqlite3.Error as e:
+            print(e)
+    
+    def create_table_empleados(self):
+        try:
+            query = """
+            CREATE TABLE IF NOT EXISTS empleados(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT,
+            apellido_paterno TEXT,
+            apellido_materno TEXT,
+            rfc TEXT,
+            curp TEXT,
+            NSS TEXT,
+            fecha_nacimiento TEXT,
+            puesto TEXT,
+            departamento TEXT,
+            sueldo_diario FLOAT,
+            direccion TEXT,
+            telefono TEXT,
+            email TEXT,
+            fecha_ingreso TEXT,
+            fecha_baja TEXT,
+            antiguedad as (julianday('now') - julianday(fecha_ingreso)) VIRTUAL,
+            status TEXT,
+            usuario TEXT,
+            fecha_reg TEXT);
+            """
+            self.conexion.execute(query)
+        except sqlite3.Error as e:
+            print(e)
                      
     #funcion que crea una conexion a la base de datos        
     def conectarBd(self):
