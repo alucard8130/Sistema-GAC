@@ -1573,6 +1573,7 @@ class PantallaPrincipal():
                 m.exec()
                 self.ppcm.cmblocal.setFocus()
             else:
+                
                 self.ppcm.tblCarteraCM.setRowCount(len(data))
                 for item in data:
                     saldo += float(item[4])
