@@ -2,7 +2,6 @@ import datetime
 import csv
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMessageBox, QTableWidgetItem, QFileDialog, QLineEdit
-from PyQt6.QtPrintSupport import QPrinter, QPrintDialog
 from data import ctasbancos
 from data.cartera import CarteraDataAC, CarteraDataCM
 from data.clientes import BuscarCliente, ClientesData
@@ -14,7 +13,7 @@ from data.regareac import RegACData
 from data.regcliente import RegClienteData
 from data.regcontrato import RegContratoData
 from data.regctabancos import RegCtasBancoData
-from data.regfacturas import RegFacturaData, RegPeriodoFactData
+from data.regfacturas import RegFacturaData
 from data.reglocal import RegLocalData
 from data.regpagos import  RegCarteraData, RegCobranzaData
 from data.ubicaciones import  AreasData, ListaAreasData, ListaCuotasData, UbicacionesData
