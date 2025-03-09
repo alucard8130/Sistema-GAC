@@ -1,8 +1,9 @@
-#clase 
+
 class RegProveedor():
-    def __init__(self, nombre="", rfc="", curp="",tipoServicio="", cuentaBanco="",direccion="",telefono="",email="",usuario="",fechaReg=""):
+    def __init__(self, nombre="", rfc="",nComercial="", curp="",tipoServicio="", cuentaBanco="",direccion="",telefono="",email="",usuario="",fReg=""):
         self._nombre = nombre
         self._rfc = rfc
+        self._nComercial= nComercial
         self._curp = curp
         self._tipoServicio = tipoServicio
         self._cuentaBanco = cuentaBanco
@@ -10,7 +11,7 @@ class RegProveedor():
         self._telefono = telefono
         self._email = email
         self._usuario = usuario
-        self._fechaReg = fechaReg
+        self._fechaReg = fReg
 
         
         

@@ -16,8 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QTextEdit,
-    QWidget)
+    QLineEdit, QPushButton, QSizePolicy, QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -80,10 +79,6 @@ class Ui_Dialog(object):
         self.frame.setGeometry(QRect(-10, 70, 601, 351))
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.txtRFC = QTextEdit(self.frame)
-        self.txtRFC.setObjectName(u"txtRFC")
-        self.txtRFC.setGeometry(QRect(390, 40, 191, 30))
-        self.txtRFC.setStyleSheet(u"border-radius:5px;")
         self.label = QLabel(self.frame)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(20, 20, 141, 16))
@@ -127,18 +122,14 @@ class Ui_Dialog(object):
         self.txtNombre_comercial.setStyleSheet(u"border-radius:5px;")
         self.txtDireccion = QLineEdit(self.frame)
         self.txtDireccion.setObjectName(u"txtDireccion")
-        self.txtDireccion.setGeometry(QRect(310, 280, 271, 61))
+        self.txtDireccion.setGeometry(QRect(270, 300, 311, 31))
         self.txtDireccion.setStyleSheet(u"border-radius:5px;")
         self.label_15 = QLabel(self.frame)
         self.label_15.setObjectName(u"label_15")
-        self.label_15.setGeometry(QRect(310, 260, 101, 16))
+        self.label_15.setGeometry(QRect(270, 280, 101, 16))
         self.label_16 = QLabel(self.frame)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setGeometry(QRect(390, 100, 71, 16))
-        self.txtCURP = QTextEdit(self.frame)
-        self.txtCURP.setObjectName(u"txtCURP")
-        self.txtCURP.setGeometry(QRect(390, 120, 191, 30))
-        self.txtCURP.setStyleSheet(u"border-radius:5px;")
         self.label_17 = QLabel(self.frame)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setGeometry(QRect(20, 190, 101, 16))
@@ -153,6 +144,14 @@ class Ui_Dialog(object):
         self.txtTipoServicio.setObjectName(u"txtTipoServicio")
         self.txtTipoServicio.setGeometry(QRect(20, 210, 231, 30))
         self.txtTipoServicio.setStyleSheet(u"border-radius:5px;")
+        self.txtRFC = QLineEdit(self.frame)
+        self.txtRFC.setObjectName(u"txtRFC")
+        self.txtRFC.setGeometry(QRect(390, 40, 191, 30))
+        self.txtRFC.setStyleSheet(u"border-radius:5px;")
+        self.txtCURP = QLineEdit(self.frame)
+        self.txtCURP.setObjectName(u"txtCURP")
+        self.txtCURP.setGeometry(QRect(390, 120, 191, 30))
+        self.txtCURP.setStyleSheet(u"border-radius:5px;")
 
         self.retranslateUi(Dialog)
 

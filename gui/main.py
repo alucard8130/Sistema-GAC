@@ -1899,16 +1899,18 @@ class PantallaPrincipal():
             regProveedor = RegProveedor(
                 nombre=self.fprov.txtRazon_social.text().upper(),
                 rfc=self.fprov.txtRFC.text().upper(),
+                nComercial=self.fprov.txtNombre_comercial.text().upper(),
+                curp=self.fprov.txtCURP.text().upper(),
                 tipoServicio=self.fprov.txtTipoServicio.text(),
                 cuentaBanco=self.fprov.txtBanco.text().upper(),
                 direccion=self.fprov.txtDireccion.text(),
                 telefono=self.fprov.txtTelefono.text(),
                 email=self.fprov.txtEmail.text().lower(),
                 usuario=self.pp.lblName_User.text(),
-                fechareg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                fReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
             )
             objData = ProveedoresData()
-            if objData.registrar(info=regProveedor):
+            if objData.registrar_proveedor(regProveedor):
                 m.setText("Proveedor registrado con éxito")
                 self.limpiar_campos_fprov()
             else:
@@ -1919,6 +1921,8 @@ class PantallaPrincipal():
     def limpiar_campos_fprov(self):
         self.fprov.txtRazon_social.setText("")
         self.fprov.txtRFC.setText("")
+        self.fprov.txtNombre_comercial.setText("")
+        self.fprov.txtCURP.setText("")
         self.fprov.txtDireccion.setText("")
         self.fprov.txtTelefono.setText("")
         self.fprov.txtEmail.setText("")

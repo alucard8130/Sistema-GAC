@@ -296,6 +296,7 @@ class Conexion():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre_razon TEXT,
             rfc TEXT,
+            nombre_comercial TEXT,
             curp TEXT,
             tipo_servicio TEXT,
             cuenta_banco TEXT,

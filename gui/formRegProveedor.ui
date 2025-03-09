@@ -157,19 +157,6 @@ color: rgb(216, 224, 236);</string>
    <property name="frameShadow">
     <enum>QFrame::Shadow::Raised</enum>
    </property>
-   <widget class="QTextEdit" name="txtRFC">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>40</y>
-      <width>191</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:5px;</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
@@ -314,10 +301,10 @@ color: rgb(216, 224, 236);</string>
    <widget class="QLineEdit" name="txtDireccion">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>280</y>
-      <width>271</width>
-      <height>61</height>
+      <x>270</x>
+      <y>300</y>
+      <width>311</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -327,8 +314,8 @@ color: rgb(216, 224, 236);</string>
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>260</y>
+      <x>270</x>
+      <y>280</y>
       <width>101</width>
       <height>16</height>
      </rect>
@@ -348,19 +335,6 @@ color: rgb(216, 224, 236);</string>
     </property>
     <property name="text">
      <string>CURP</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="txtCURP">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>120</y>
-      <width>191</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:5px;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_17">
@@ -408,6 +382,32 @@ color: rgb(216, 224, 236);</string>
       <x>20</x>
       <y>210</y>
       <width>231</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:5px;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtRFC">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>40</y>
+      <width>191</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:5px;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtCURP">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>120</y>
+      <width>191</width>
       <height>30</height>
      </rect>
     </property>
