@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QTextEdit, QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QLabel,
+    QLineEdit, QPushButton, QSizePolicy, QTextEdit,
+    QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -139,12 +139,6 @@ class Ui_Dialog(object):
         self.txtCURP.setObjectName(u"txtCURP")
         self.txtCURP.setGeometry(QRect(390, 120, 191, 30))
         self.txtCURP.setStyleSheet(u"border-radius:5px;")
-        self.cmbServicios = QComboBox(self.frame)
-        self.cmbServicios.addItem("")
-        self.cmbServicios.setObjectName(u"cmbServicios")
-        self.cmbServicios.setGeometry(QRect(20, 210, 231, 30))
-        self.cmbServicios.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius:5px;")
         self.label_17 = QLabel(self.frame)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setGeometry(QRect(20, 190, 101, 16))
@@ -155,6 +149,10 @@ class Ui_Dialog(object):
         self.label_19 = QLabel(self.frame)
         self.label_19.setObjectName(u"label_19")
         self.label_19.setGeometry(QRect(460, 190, 71, 16))
+        self.txtTipoServicio = QLineEdit(self.frame)
+        self.txtTipoServicio.setObjectName(u"txtTipoServicio")
+        self.txtTipoServicio.setGeometry(QRect(20, 210, 231, 30))
+        self.txtTipoServicio.setStyleSheet(u"border-radius:5px;")
 
         self.retranslateUi(Dialog)
 
@@ -174,8 +172,6 @@ class Ui_Dialog(object):
         self.label_11.setText(QCoreApplication.translate("Dialog", u"Nombre Comercial", None))
         self.label_15.setText(QCoreApplication.translate("Dialog", u"Direccion*", None))
         self.label_16.setText(QCoreApplication.translate("Dialog", u"CURP", None))
-        self.cmbServicios.setItemText(0, QCoreApplication.translate("Dialog", u"--selecciona una opcion--", None))
-
         self.label_17.setText(QCoreApplication.translate("Dialog", u"Tipo Servicio*", None))
         self.label_19.setText(QCoreApplication.translate("Dialog", u"Telefono*", None))
     # retranslateUi

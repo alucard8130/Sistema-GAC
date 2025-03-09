@@ -1876,9 +1876,9 @@ class PantallaPrincipal():
         elif self.fprov.txtRFC.text() == "":
             m.setText("Captura RFC del proveedor")
             self.fprov.txtRFC.setFocus()
-        elif self.fprov.cmbServicios.currentIndex() == 0:
-            m.setText("Selecciona un tipo de servicio")
-            self.fprov.cmbServicios.setFocus()
+        elif self.fprov.txtTipoServicio.text() == "":
+            m.setText("Captura  tipo de servicio")
+            self.fprov.txtTipoServicio.setFocus()
         elif self.fprov.txtBanco.text()=="":
             m.setText("Captura banco")
             self.fprov.txtBanco.setFocus()            
@@ -1899,7 +1899,7 @@ class PantallaPrincipal():
             regProveedor = RegProveedor(
                 nombre=self.fprov.txtRazon_social.text().upper(),
                 rfc=self.fprov.txtRFC.text().upper(),
-                tipoServicio=self.fprov.cmbServicios.currentText(),
+                tipoServicio=self.fprov.txtTipoServicio.text(),
                 cuentaBanco=self.fprov.txtBanco.text().upper(),
                 direccion=self.fprov.txtDireccion.text(),
                 telefono=self.fprov.txtTelefono.text(),
@@ -1922,7 +1922,7 @@ class PantallaPrincipal():
         self.fprov.txtDireccion.setText("")
         self.fprov.txtTelefono.setText("")
         self.fprov.txtEmail.setText("")
-        self.fprov.cmbServicios.setCurrentIndex(0)
+        self.fprov.txtTipoServicio.setText("")
         self.fprov.txtBanco.setText("")
     
     def salir_form_proveedores(self):

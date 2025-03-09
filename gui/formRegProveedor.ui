@@ -363,25 +363,6 @@ color: rgb(216, 224, 236);</string>
      <string notr="true">border-radius:5px;</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="cmbServicios">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>210</y>
-      <width>231</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:5px;</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>--selecciona una opcion--</string>
-     </property>
-    </item>
-   </widget>
    <widget class="QLabel" name="label_17">
     <property name="geometry">
      <rect>
@@ -419,6 +400,19 @@ border-radius:5px;</string>
     </property>
     <property name="text">
      <string>Telefono*</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtTipoServicio">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>210</y>
+      <width>231</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:5px;</string>
     </property>
    </widget>
   </widget>
