@@ -12,6 +12,7 @@ from data.periodo import PeriodosCargaData
 from data.regareac import RegACData
 from data.regcliente import RegClienteData
 from data.regcontrato import RegContratoData
+from data.proveedores import ProveedoresData
 from data.regctabancos import RegCtasBancoData
 from data.regfacturas import RegFacturaData
 from data.reglocal import RegLocalData
@@ -74,6 +75,8 @@ class PantallaPrincipal():
         self.pp.actionRegContrato.triggered.connect(self.abrir_form_contratos)
         self.pp.actionBuscar_Contratos.triggered.connect(self.abrir_form_buscar_contratos)
         self.pp.actionFacturacion_Masiva.triggered.connect(self.abrir_form_cmasiva)
+        self.pp.actionRegistrar_Gastos.triggered.connect(self.abrir_form_gastos)
+        self.pp.actionAlta_Proveedor_2.triggered.connect(self.abrir_form_alta_proveedor)
         self.pp.btnSalirPP.clicked.connect(self.salir_pp) 
     
             
@@ -1860,12 +1863,47 @@ class PantallaPrincipal():
 
     
     def salir_form_cmasiva(self):
-        self.ffm.close()        
+        self.ffm.close() 
+        
+        
+###################################################MODULO GASTOS#####################################################################
+
+    def abrir_form_gastos(self):
+        self.fexp=uic.loadUi("gui/formRegGastos.ui")
+        self.fexp.show()
+        self.fexp.cmbTipoGasto.currentIndexChanged.connect(self.set_cmb_proveedor)
+        self.fexp.btnRegistrar.clicked.connect(self.registrar_gasto)
+        self.fexp.btnSalir.clicked.connect(self.salir_form_gastos)
+        
+    def set_cmb_proveedor(self):
+        search=ProveedoresData()
+        data=search.lista_proveedores()
+        for item in data:
+            self.fexp.cmbProveedor.addItem(item[1])    
+
+    def registrar_gasto(self):
+        pass
+    
+    def salir_form_gastos(self):
+        self.fexp.close()
+
+    def abrir_form_alta_proveedor(self):
+        self.fprov=uic.loadUi("gui/formRegProveedor.ui")
+        self.fprov.show()
+        self.fprov.btnRegistrar.clicked.connect(self.registrar_proveedor)
+        self.fprov.btnSalir.clicked.connect(self.salir_form_proveedores)
+        
+    def registrar_proveedor(self):
+        pass
+    
+    def salir_form_proveedores(self):
+        self.fprov.close()       
+
+
 
     def reiniciar_sistema(self):
         self.pp.close()
-    
-                
+                    
     
     
     
