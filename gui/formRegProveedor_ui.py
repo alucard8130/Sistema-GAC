@@ -162,7 +162,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle("")
         self.btnRegistrar.setText(QCoreApplication.translate("Dialog", u"Guadar", None))
         self.btnSalir.setText(QCoreApplication.translate("Dialog", u"Salir", None))
-        self.label_13.setText(QCoreApplication.translate("Dialog", u" REGISTRO PROVEEDORES", None))
+        self.label_13.setText(QCoreApplication.translate("Dialog", u" REGISTRO PRESTADORES DE SERVICIOS / PROVEEDORES", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"Razon Social*", None))
         self.label_6.setText(QCoreApplication.translate("Dialog", u"Email*", None))
         self.label_10.setText(QCoreApplication.translate("Dialog", u"RFC*", None))

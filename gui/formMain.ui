@@ -658,15 +658,15 @@ color: rgb(255, 255, 255);</string>
     </property>
     <addaction name="actionRegistrar_Gastos"/>
     <addaction name="actionReporte_Gastos"/>
-    <addaction name="actionAlta_Proveedor_2"/>
+    <addaction name="actionAlta_Prest_Serv"/>
     <addaction name="actionAlta_Empleado"/>
    </widget>
    <widget class="QMenu" name="menuOtros_Ingresos">
     <property name="title">
      <string>Otros Ingresos</string>
     </property>
-    <addaction name="actionRegistro_O_Ingresos"/>
     <addaction name="actionReporte_Ingresos"/>
+    <addaction name="actionRegistro_O_Ingresos"/>
    </widget>
    <widget class="QMenu" name="menuCartera_Cobranza">
     <property name="title">
@@ -679,8 +679,8 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>Estadisticas y Graficos</string>
     </property>
-    <addaction name="actionDashboard_Gastos"/>
     <addaction name="actionDashboard_Ingresos"/>
+    <addaction name="actionDashboard_Gastos"/>
     <addaction name="actionDasboard_Cartera_CM"/>
     <addaction name="actionDasboard_Cartera_AC"/>
    </widget>
@@ -770,7 +770,7 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionRegistro_O_Ingresos">
    <property name="text">
-    <string>Registro O. Ingresos</string>
+    <string>Registro otros Ingresos</string>
    </property>
   </action>
   <action name="actionReporte_Ingresos">
@@ -780,12 +780,12 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionCartera_Cuotas_Mantto">
    <property name="text">
-    <string>Cartera Cuotas Mantto</string>
+    <string>Cuotas Locales Comerciales</string>
    </property>
   </action>
   <action name="actionCartera_Areas_Comunes">
    <property name="text">
-    <string>Cartera Areas Comunes</string>
+    <string>Cuotas Areas Comunes</string>
    </property>
   </action>
   <action name="actionDashboard_Gastos">
@@ -800,12 +800,12 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionDasboard_Cartera_CM">
    <property name="text">
-    <string>Dasboard Cartera CM</string>
+    <string>Dasboard Cartera Locales</string>
    </property>
   </action>
   <action name="actionDasboard_Cartera_AC">
    <property name="text">
-    <string>Dasboard Cartera AC</string>
+    <string>Dasboard Cartera Areas</string>
    </property>
   </action>
   <action name="actionNuevo_Usuario">
@@ -865,17 +865,17 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionRegistrar_Gastos">
    <property name="text">
-    <string>Registrar Gastos</string>
+    <string>Registro de Gastos</string>
    </property>
   </action>
-  <action name="actionAlta_Proveedor_2">
+  <action name="actionAlta_Prest_Serv">
    <property name="text">
-    <string>Alta Proveedor</string>
+    <string>Reg Prestador Servicios</string>
    </property>
   </action>
   <action name="actionAlta_Empleado">
    <property name="text">
-    <string>Alta Empleado</string>
+    <string>Reg Empleados</string>
    </property>
   </action>
   <action name="actionFacturacion_Masiva">

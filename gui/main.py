@@ -14,6 +14,7 @@ from data.regcliente import RegClienteData
 from data.regcontrato import RegContratoData
 from data.proveedores import ProveedoresData
 from data.regctabancos import RegCtasBancoData
+from data.regempleado import RegEmpleadoData
 from data.regfacturas import RegFacturaData
 from data.reggastos import RegGastoData
 from data.reglocal import RegLocalData
@@ -27,6 +28,7 @@ from model.regProveedor import RegProveedor
 from model.regareac import RegAC
 from model.regcliente import RegCliente
 from model.regcontrato import RegContrato
+from model.regempleado import RegEmpleado
 from model.reglocal import RegLocal
 from model.regperiodofacturacion import RegPeriodoFacturacion
 from model.user import Usuario 
@@ -78,7 +80,8 @@ class PantallaPrincipal():
         self.pp.actionBuscar_Contratos.triggered.connect(self.abrir_form_buscar_contratos)
         self.pp.actionFacturacion_Masiva.triggered.connect(self.abrir_form_cmasiva)
         self.pp.actionRegistrar_Gastos.triggered.connect(self.abrir_form_gastos)
-        self.pp.actionAlta_Proveedor_2.triggered.connect(self.abrir_form_alta_proveedor)
+        self.pp.actionAlta_Prest_Serv.triggered.connect(self.abrir_form_alta_proveedor)
+        self.pp.actionAlta_Empleado.triggered.connect(self.abrir_form_alta_empleado)
         self.pp.btnSalirPP.clicked.connect(self.salir_pp) 
     
             
@@ -300,7 +303,6 @@ class PantallaPrincipal():
     def mostrar_panel(self):
         self.pp.lblImagen.setGeometry(9,9,680,690)
         self.pp.btnNewUser.setGeometry(110, 490, 250, 30)
-        #self.pp.cmbEmpresa.setVisible(True)
         self.pp.btnIngresar.setVisible(False)
         self.pp.btnNewUser.setText("Nuevo Usuario")
         self.pp.btnInvisible.setVisible(True)
@@ -316,23 +318,14 @@ class PantallaPrincipal():
         self.pp.txtPassword.setText("adMin_81@")
         
     def ocultar_panel(self):
-        #if self.pp.menubar.isVisible():
-            self.pp.btnIngresar.setVisible(True)
-            self.pp.lblImagen.setGeometry(9,9,1200,690) 
-            self.pp.txtNameUser.setVisible(False)
-            self.pp.btnNewUser.setVisible(False)
-            self.pp.btnRecuperar.setVisible(False)
-            self.pp.txtUsuario.setText("")
-            self.pp.txtPassword.setText("")
-       # else:
-            # self.pp.btnIngresar.setVisible(True)
-            # self.pp.lblImagen.setGeometry(9,9,1200,690) 
-            # self.pp.txtNameUser.setVisible(False)
-            # self.pp.btnNewUser.setVisible(False)
-            # self.pp.btnRecuperar.setVisible(False)
-            # self.pp.txtUsuario.setText("")
-            # self.pp.txtPassword.setText("")              
-            
+        self.pp.btnIngresar.setVisible(True)
+        self.pp.lblImagen.setGeometry(9,9,1200,690) 
+        self.pp.txtNameUser.setVisible(False)
+        self.pp.btnNewUser.setVisible(False)
+        self.pp.btnRecuperar.setVisible(False)
+        self.pp.txtUsuario.setText("")
+        self.pp.txtPassword.setText("")
+                      
     def mostrar_password(self):
         self.pp.txtPassword.setEchoMode(QLineEdit.EchoMode.Normal)    
             
@@ -530,8 +523,7 @@ class PantallaPrincipal():
             elif  self.fal.txtCuota.text()=="":
                 m.setText("Capture Cuota Mensual")        
                 self.fal.txtCuota.setFocus()
-            
-                
+                 
             elif not self.fal.txtCuota.text().replace('.',"" ,1).isnumeric():   
                 m.setText("Captura solo numeros")
                 self.fal.txtCuota.setText('0.00')
@@ -1993,7 +1985,72 @@ class PantallaPrincipal():
     def salir_form_proveedores(self):
         self.fprov.close()       
 
+    def abrir_form_alta_empleado(self):
+        self.femp=uic.loadUi("gui/formEmpleados.ui")
+        self.femp.show()
+        self.femp.btnGuardar.clicked.connect(self.registrar_empleado)
+        self.femp.btnSalir.clicked.connect(self.salir_form_empleados)
+        
+    
+    def registrar_empleado(self):
+        m = QMessageBox()
+        m.setIcon(QMessageBox.Icon.Information)
+        m.setWindowTitle("Registro Empleado")
+        m.setStandardButtons(QMessageBox.StandardButton.Ok)
 
+        if self.femp.txtNombre.text() == "":
+            m.setText("Captura nombre del empleado")
+            self.femp.txtNombre.setFocus()
+        elif self.femp.txtRFC.text() == "":
+            m.setText("Captura RFC del empleado")
+            self.femp.txtRFC.setFocus()
+        elif self.femp.txtCURP.text() == "":
+            m.setText("Captura CURP del empleado")
+            self.femp.txtCURP.setFocus()
+        elif self.femp.txtDireccion.text() == "":
+            m.setText("Captura dirección del empleado")
+            self.femp.txtDireccion.setFocus()
+        elif self.femp.txtTelefono.text() == "":
+            m.setText("Captura teléfono del empleado")
+            self.femp.txtTelefono.setFocus()
+        elif not self.femp.txtTelefono.text().isnumeric():
+            m.setText("Captura solo números en el teléfono")
+            self.femp.txtTelefono.setText("")
+            self.femp.txtTelefono.setFocus()
+        elif self.femp.txtEmail.text() == "":
+            m.setText("Captura email del empleado")
+            self.femp.txtEmail.setFocus()
+        else:
+            regEmpleado = RegEmpleado(
+                nombre=self.femp.txtNombre.text().upper(),
+                rfc=self.femp.txtRFC.text().upper(),
+                curp=self.femp.txtCURP.text().upper(),
+                direccion=self.femp.txtDireccion.text(),
+                telefono=self.femp.txtTelefono.text(),
+                email=self.femp.txtEmail.text().lower(),
+                usuario=self.pp.lblName_User.text(),
+                fReg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+            )
+            objData = RegEmpleadoData()
+            if objData.registrar(regEmpleado):
+                m.setText("Empleado registrado con éxito")
+                self.limpiar_campos_femp()
+            else:
+                m.setText("Empleado ya registrado")
+                self.limpiar_campos_femp()
+        m.exec()
+
+    def limpiar_campos_femp(self):
+        self.femp.txtNombre.setText("")
+        self.femp.txtRFC.setText("")
+        self.femp.txtCURP.setText("")
+        self.femp.txtDireccion.setText("")
+        self.femp.txtTelefono.setText("")
+        self.femp.txtEmail.setText("")
+    
+    def salir_form_empleados(self):
+        self.femp.close()
+    
 
     def reiniciar_sistema(self):
         self.pp.close()

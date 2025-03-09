@@ -331,7 +331,7 @@ class Conexion():
             fecha_ingreso TEXT,
             fecha_baja TEXT,
             antiguedad as (julianday('now') - julianday(fecha_ingreso)) VIRTUAL,
-            status TEXT,
+            status_activo BOOLEAN,
             usuario TEXT,
             fecha_reg TEXT);
             """

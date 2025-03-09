@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formClientes.ui'
+## Form generated from reading UI file 'formEmpleados.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.1
 ##
@@ -146,7 +146,6 @@ class Ui_formClientes(object):
         self.cmbTipoCliente.addItem("")
         self.cmbTipoCliente.addItem("")
         self.cmbTipoCliente.addItem("")
-        self.cmbTipoCliente.addItem("")
         self.cmbTipoCliente.setObjectName(u"cmbTipoCliente")
         self.cmbTipoCliente.setEnabled(True)
         self.cmbTipoCliente.setGeometry(QRect(370, 250, 201, 30))
@@ -219,7 +218,7 @@ class Ui_formClientes(object):
 
     def retranslateUi(self, formClientes):
         formClientes.setWindowTitle("")
-        self.label_6.setText(QCoreApplication.translate("formClientes", u" REGISTRO CLIENTES CUOTAS", None))
+        self.label_6.setText(QCoreApplication.translate("formClientes", u" REGISTRO TRABAJADORES ", None))
         self.label_4.setText(QCoreApplication.translate("formClientes", u"CURP", None))
         self.cmbTipoContribuyente.setItemText(0, QCoreApplication.translate("formClientes", u"---seleccione una opcion...", None))
         self.cmbTipoContribuyente.setItemText(1, QCoreApplication.translate("formClientes", u"Persona Fisica", None))
@@ -239,8 +238,7 @@ class Ui_formClientes(object):
         self.cmbTipoCliente.setItemText(1, QCoreApplication.translate("formClientes", u"Areas Comunes", None))
         self.cmbTipoCliente.setItemText(2, QCoreApplication.translate("formClientes", u"Locales Comerciales", None))
         self.cmbTipoCliente.setItemText(3, QCoreApplication.translate("formClientes", u"Espacios Publicitarios", None))
-        self.cmbTipoCliente.setItemText(4, QCoreApplication.translate("formClientes", u"Estacionamiento", None))
-        self.cmbTipoCliente.setItemText(5, QCoreApplication.translate("formClientes", u"Recuperacion Servicios", None))
+        self.cmbTipoCliente.setItemText(4, QCoreApplication.translate("formClientes", u"Recuperacion Servicios", None))
 
         self.btnGuardar.setText(QCoreApplication.translate("formClientes", u"Guardar", None))
         self.btnEditar.setText(QCoreApplication.translate("formClientes", u"Editar", None))
