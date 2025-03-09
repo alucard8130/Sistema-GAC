@@ -124,7 +124,6 @@ class PantallaPrincipal():
                     m.setText(f"Error en la carga de clientes  : {e}")        
         m.exec()               
                         
-           
     def carga_ubicaciones_bd(self):
         m=QMessageBox()
         m.setIcon(QMessageBox.Icon.Information)
@@ -165,7 +164,6 @@ class PantallaPrincipal():
                 except Exception as e:
                     m.setText(f"Error en la carga de ubicaciones: {e}")        
         m.exec()                           
-                
                 
     def carga_areasC_bd(self):
         m=QMessageBox()
@@ -209,7 +207,6 @@ class PantallaPrincipal():
                     m.setText(f"Error en la carga de areas comunes: {e}")
         m.exec()             
     
-    
     def carga_contratos_bd(self):
         m=QMessageBox()
         m.setIcon(QMessageBox.Icon.Information)
@@ -251,7 +248,6 @@ class PantallaPrincipal():
                 except Exception as e:
                     m.setText(f"Error en la carga de contratos : {e}")
         m.exec()             
-        
         
     def carga_saldos_iniciales_cartera(self):
         m=QMessageBox()
@@ -298,8 +294,7 @@ class PantallaPrincipal():
                             m.setText("base de datos cargada")
                 except Exception as e:
                     m.setText(f"Error en la carga de saldos iniciales: {e}")
-        m.exec()                         
-                   
+        m.exec()                                      
         
     def mostrar_panel(self):
         self.pp.lblImagen.setGeometry(9,9,680,690)
@@ -339,10 +334,10 @@ class PantallaPrincipal():
             
     def mostrar_password(self):
         self.pp.txtPassword.setEchoMode(QLineEdit.EchoMode.Normal)    
-        
-       
+            
     def salir_pp(self):
         self.pp.close()  
+ 
  
  ##############################################LOG IN###################################################       
     def validar_acceso(self):
@@ -490,8 +485,7 @@ class PantallaPrincipal():
                 
         m.exec()
     
-    
-    
+ 
  #################################ALTA LOCALES COMERCIALES###############################################   
     def abrir_form_alta_local(self):
         self.fal=uic.loadUi("gui/formLocales.ui")
@@ -524,7 +518,6 @@ class PantallaPrincipal():
                 self.fal.txtSuperficie.setText('0.00')
                 self.fal.txtSuperficie.setFocus()    
                                 
-            #elif self.fal.txtCliente.text()=="":
             elif self.fal.cmbClientes.currentIndex()==0:
                 m.setText("Selecciona una opcion")
                 self.fal.cmbClientes.setFocus()
@@ -591,6 +584,7 @@ class PantallaPrincipal():
      
     def salir_form_local(self):
         self.fal.close()        
+     
           
  #################################ALTA AREAS COMUNES##############################################   
     def abrir_form_alta_AC(self):
@@ -629,7 +623,6 @@ class PantallaPrincipal():
             self.fac.txtSuperficie.setText('0.00')
             self.fac.txtSuperficie.setFocus()    
                         
-        #elif self.fac.txtCliente.text()=="":
         elif self.fac.cmbClientes.currentIndex()==0:
             m.setText("Seleccione una opcion")
             self.fac.cmbClientes.setFocus()
@@ -690,9 +683,9 @@ class PantallaPrincipal():
         
     def salir_form_area(self):
         self.fac.close()   
+  
                
- #######################   PANTALLA PRINCIPAL GESTOR LOCALES COMERCIALES#############################################       
-   
+ #######################   PANTALLA PRINCIPAL GESTOR LOCALES COMERCIALES#############################################         
     def abrir_form_PPCM(self):
         self.ppcm = uic.loadUi("gui/formPrincipalCM.ui")
         self.ppcm.show()
@@ -730,6 +723,7 @@ class PantallaPrincipal():
     def salir_form_PPCM(self):
         self.ppcm.close()         
     
+    
 ################################## PAGOS---COBRANZA---LC --######################################        
     def abrir_form_pagosCM(self):
         self.fpcm=uic.loadUi("gui/formRegPagosCM.ui")
@@ -751,8 +745,7 @@ class PantallaPrincipal():
         datos=obj.lista_ctas()
         for item in datos:
             self.fpcm.cmbCtaBancaria.addItem(item[2])
-            
-    
+              
     def registrar_cobranzaCM(self):
         m=QMessageBox()
         m.setIcon(QMessageBox.Icon.Warning)
@@ -843,8 +836,8 @@ class PantallaPrincipal():
     def salir_form_pagosCM(self):
         self.fpcm.close() 
     
-    ################################## ---FACTURACION INDIVIDUAL--LC--######################################         
-   
+    
+####################################### ---FACTURACION INDIVIDUAL--LC--######################################          
     def abrir_form_facturacionCM(self):
         if self.ppcm.cmblocal.currentIndex()==0:
             m=QMessageBox()
@@ -946,13 +939,11 @@ class PantallaPrincipal():
         self.ffcm.cmbTipoFact.setCurrentIndex(0)
         self.ffcm.txtComentarios.setText("")
 
-   
     def salir_form_facturacionCM(self):
         self.ffcm.close()   
    
-            
-  #############################PANTALLA PRINCIPAL GESTOR AREAS COMUNES#############################################
-    
+   
+#############################PANTALLA PRINCIPAL GESTOR AREAS COMUNES#############################################    
     def abrir_form_PPAC(self):
         self.ppac = uic.loadUi("gui/formPrincipalAC.ui")
         self.ppac.show()   
@@ -963,7 +954,6 @@ class PantallaPrincipal():
         self.ppac.btnRegFact.clicked.connect(self.abrir_form_facturacionAC)
         self.ppac.btnEdoCta.clicked.connect(self.exportar_info_a_excelAC)
         self.ppac.btnSalir.clicked.connect(self.salir_form_PPAC)
-  
   
     def validar_campos_PPAC(self): 
         if self.ppac.cmbContrato.currentIndex()==0: 
@@ -989,13 +979,12 @@ class PantallaPrincipal():
         for item in data:
             self.ppac.cmbAreaC.addItem(item[3])
             self.ppac.cmbCliente.addItem(item[2])
-                 
-    
+                  
     def salir_form_PPAC(self):
         self.ppac.close()    
     
     
-   ################################## PAGOS---COBRANZA--AC --######################################        
+################################## PAGOS---COBRANZA--AC --######################################        
     def abrir_form_pagosAC(self):
         self.fpac=uic.loadUi("gui/formRegPagosAC.ui")
         self.fpac.show()
@@ -1016,8 +1005,7 @@ class PantallaPrincipal():
         datos=obj.lista_ctas()
         for item in datos:
             self.fpac.cmbCtaBancaria.addItem(item[2])        
-        
-        
+             
     def registrar_cobranzaAC(self):
         m=QMessageBox()
         m.setIcon(QMessageBox.Icon.Warning)
@@ -1108,13 +1096,12 @@ class PantallaPrincipal():
         self.fpac.cmbCtaBancaria.setCurrentIndex(0)
         self.fpac.txtCheque.setText("")
         self.fpac.txtComentarios.setText("")
-            
-      
+                
     def salir_form_pagosAC(self):
         self.fpac.close() 
+
         
-  ################################## ---FACTURACION INDIVIDUAL--AC --######################################         
-   
+################################## ---FACTURACION INDIVIDUAL--AC --######################################           
     def abrir_form_facturacionAC(self):
         if self.ppac.cmbContrato.currentIndex()==0:
             m=QMessageBox()
@@ -1220,17 +1207,14 @@ class PantallaPrincipal():
         self.ffac.close()   
    
                  
-##########################  CLIENTES #########################################    
-    
- 
+##########################  CLIENTES #########################################   
     def abrir_form_clientes(self):
         self.fcl=uic.loadUi("gui/formClientes.ui")
         self.fcl.show()
         self.fcl.checkBoxStatus.setChecked(True)
         self.fcl.btnGuardar.clicked.connect(self.registrar_cliente)
         self.fcl.btnSalir.clicked.connect(self.salir_form_clientes)  
-   
-      
+       
     def registrar_cliente(self):      
             m=QMessageBox()
             m.setIcon(QMessageBox.Icon.Warning)
@@ -1307,9 +1291,9 @@ class PantallaPrincipal():
 
     def salir_form_clientes(self):
         self.fcl.close()     
+  
         
 #########################CTA BANCARIA#################################################
-
     def abrir_form_banco(self):
         self.fban=uic.loadUi("gui/formBanco.ui")
         self.fban.btnGuardar.clicked.connect(self.registrar_cta_banco)
@@ -1361,14 +1345,11 @@ class PantallaPrincipal():
         self.fban.cmbTipoCta.setCurrentIndex(0)
         self.fban.cmbTipoMoneda.setCurrentIndex(0) 
                           
-
     def salir_form_banco(self):
         self.fban.close()
         
  
- 
 ##################################REGISTRAR CONTRATOS#############################################
-
     def abrir_form_contratos(self):
         self.fcon=uic.loadUi("gui/formContratos.ui")
         self.fcon.show()
@@ -1490,10 +1471,9 @@ class PantallaPrincipal():
             
     def salir_form_contratos(self):
         self.fcon.close()        
-   
-##################################BUSCAR Y EDITAR CONTRATOS#############################################    
 
-        
+   
+##################################BUSCAR Y EDITAR CONTRATOS#############################################           
     def abrir_form_buscar_contratos(self):
         self.fbc=uic.loadUi("gui/formBcontratos.ui")
         self.fbc.show()
@@ -1525,8 +1505,7 @@ class PantallaPrincipal():
                 self.fbc.txtDG.setText(f"{item[5]:.2f}")
                 self.fbc.checkBActivo.setChecked(item[6].lower()=='true')
                 self.fbc.checkBvencido.setChecked(item[7].lower() == 'true')
-              
-                
+                             
     def guardar_edicion(self):
         m=QMessageBox()
         m.setIcon(QMessageBox.Icon.Information)
@@ -1552,15 +1531,12 @@ class PantallaPrincipal():
         else:
             m.setText("Contrato no editado")
         m.exec()
-      
-      
+            
     def salir_fbc(self):
         self.fbc.close()
     
-        
-         
-#####################################TABLA DE INFORMACION CUOTAS MANTTO############################################        
-  
+                 
+#####################################TABLA DE INFORMACION CUOTAS MANTTO############################################          
     def mostrar_informacionCM(self):
         if self.ppcm.cmblocal.currentIndex()==0 :
             m=QMessageBox()
@@ -1628,7 +1604,6 @@ class PantallaPrincipal():
 
                 
 ##############################TABLA DE INFORMACION AREAS COMUNES############################################        
-
     def mostrar_informacionAC(self):
         if self.ppac.cmbContrato.currentIndex()==0:
             m=QMessageBox()
@@ -1694,8 +1669,7 @@ class PantallaPrincipal():
                 m.setText(f"Error al exportar a Excel: {e}")
                 m.exec()
         
-        
-        
+                
 ########################################CARGA MASIVA DE CUOTAS###########################################################
     def abrir_form_cmasiva(self):
         self.ffm=uic.loadUi("gui/formFactMasiva.ui")
@@ -1721,8 +1695,7 @@ class PantallaPrincipal():
                     
             elif self.ffm.cmbTcartera.currentIndex()==2 :
                 self.registro_masivo_cuotas_areas()    
-           
-    
+               
     def registro_masivo_cuotas_locales(self):
         m=QMessageBox()  
         m.setIcon(QMessageBox.Icon.Information)
@@ -1791,8 +1764,7 @@ class PantallaPrincipal():
         elif res==QMessageBox.StandardButton.Cancel:
             m.setText("Carga Cancelada")        
         m.exec()
-                
-            
+                            
     def registro_masivo_cuotas_areas(self):
         m=QMessageBox()  
         m.setIcon(QMessageBox.Icon.Information)
@@ -1861,14 +1833,12 @@ class PantallaPrincipal():
         elif res==QMessageBox.StandardButton.Cancel:
             m.setText("Carga Cancelada")        
         m.exec()
-
-    
+   
     def salir_form_cmasiva(self):
         self.ffm.close() 
         
         
 ###################################################MODULO GASTOS#####################################################################
-
     def abrir_form_gastos(self):
         self.fexp=uic.loadUi("gui/formRegGastos.ui")
         self.fexp.show()
