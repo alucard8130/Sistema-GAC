@@ -1,5 +1,5 @@
 
-#Registro a base de datos cartera
+
 class Reg_Cartera():
     def __init__(self,local_o_area="",clienteFact="",tipoCartera="",tipoCuota="",tipo_factura="",numFact="",importeAdeudo="",importePago="",fPago_Cobro="",
                  ctaBanco="",formaPago="",cheque="",numContrato="",statusPago="",usuario="",fechaReg="",comentarios=""):
@@ -21,8 +21,7 @@ class Reg_Cartera():
         self._feReg = fechaReg
         self._comm = comentarios
      
-        
- #registro a base datos cobranza       
+   
 class Reg_Cobranza():
     def __init__(self,num_fact="",fecha_pago="",importe_pago="",forma_pago="",cta_banco="",num_cheque="",tipoCuota="",usuario="",fechaReg="",comentarios=""):
         self._nFact = num_fact
@@ -36,8 +35,7 @@ class Reg_Cobranza():
         self._feReg = fechaReg
         self._comm = comentarios
        
-        
- #registro a base datos facturas       
+   
 class Reg_Factura():
     def __init__(self,num_factura="",cliente="",local_o_area="",fecha_factura="",tipo_cuota="",importe_factura="",tipo_factura="",tipo_cartera="",status_pago="",usuario="",fecha_reg=""):
         self._num_factura=num_factura
@@ -51,4 +49,19 @@ class Reg_Factura():
         self._status_pago=status_pago
         self._usuario=usuario
         self._fecha_reg=fecha_reg        
-        
+
+class Reg_Gasto():
+    def __init__(self,num_fact="",n_proveedor="",t_gasto="",desc_gasto="",f_pago="",n_cheque="",i_pago="",iva_ret="",isr_ret="",f_gasto="",usuario="",f_reg=""):
+        self._nFact=num_fact
+        self._n_prov=n_proveedor
+        self._tipoG=t_gasto
+        self._descG=desc_gasto
+        self._foPago=f_pago
+        self._cheque=n_cheque
+        self._iPago=i_pago
+        self._ivaRet=iva_ret
+        self._isrRet=isr_ret
+        self._feGasto=f_gasto
+        self._usuario=usuario
+        self._feReg=f_reg
+   

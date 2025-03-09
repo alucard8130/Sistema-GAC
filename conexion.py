@@ -270,6 +270,7 @@ class Conexion():
             query = """
             CREATE TABLE IF NOT EXISTS gastos(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            num_factura TEXT,
             proveedor_name TEXT,
             tipo_gasto TEXT,
             descripcion_gasto TEXT,
@@ -282,7 +283,6 @@ class Conexion():
             isr_ret FLOAT,
             fecha_gasto TEXT,
             usuario TEXT,
-            comentarios TEXT,
             fecha_reg TEXT);
             """
             self.conexion.execute(query)

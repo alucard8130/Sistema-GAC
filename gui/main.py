@@ -15,13 +15,14 @@ from data.regcontrato import RegContratoData
 from data.proveedores import ProveedoresData
 from data.regctabancos import RegCtasBancoData
 from data.regfacturas import RegFacturaData
+from data.reggastos import RegGastoData
 from data.reglocal import RegLocalData
 from data.regpagos import  RegCarteraData, RegCobranzaData
 from data.ubicaciones import  AreasData, ListaAreasData, ListaCuotasData, UbicacionesData
 from data.usuario import UsuarioData
 from model.ctasbancos import Cuentas
 from model.editcontrato import EditContrato
-from model.operaciones import Reg_Cartera, Reg_Cobranza, Reg_Factura
+from model.operaciones import Reg_Cartera, Reg_Cobranza, Reg_Factura, Reg_Gasto
 from model.regProveedor import RegProveedor
 from model.regareac import RegAC
 from model.regcliente import RegCliente
@@ -1842,7 +1843,7 @@ class PantallaPrincipal():
     def abrir_form_gastos(self):
         self.fexp=uic.loadUi("gui/formRegGastos.ui")
         self.fexp.show()
-        self.fexp.cmbTipoGasto.currentIndexChanged.connect(self.set_cmb_proveedor)
+        self.set_cmb_proveedor()
         self.fexp.btnRegistrar.clicked.connect(self.registrar_gasto)
         self.fexp.btnSalir.clicked.connect(self.salir_form_gastos)
         
@@ -1853,7 +1854,67 @@ class PantallaPrincipal():
             self.fexp.cmbProveedor.addItem(item[1])    
 
     def registrar_gasto(self):
-        pass
+        m = QMessageBox()
+        m.setIcon(QMessageBox.Icon.Information)
+        m.setWindowTitle("Registro de Gasto")
+        m.setStandardButtons(QMessageBox.StandardButton.Ok)
+
+        if self.fexp.cmbProveedor.currentIndex() == 0:
+            m.setText("Selecciona un proveedor")
+            self.fexp.cmbProveedor.setFocus()
+        elif self.fexp.txtImporte.text() == "":
+            m.setText("Captura el importe del gasto")
+            self.fexp.txtImporte.setFocus()
+        elif not self.fexp.txtImporte.text().replace('.', '', 1).isnumeric():
+            m.setText("Captura solo números en el importe")
+            self.fexp.txtImporte.setText("")
+            self.fexp.txtImporte.setFocus()
+        elif self.fexp.txtDescripcion.toPlainText() == "":
+            m.setText("Captura el concepto del gasto")
+            self.fexp.txtDescripcion.setFocus()
+        elif self.fexp.cmbFormaPago.currentIndex() == 0:
+            m.setText("Selecciona una forma de pago")
+            self.fexp.cmbFormaPago.setFocus()
+        elif self.fexp.cmbTipoGasto.currentIndex() == 0:
+            m.setText("Selecciona un tipo de gasto")
+            self.fexp.cmbTipoGasto.setFocus()
+        elif self.fexp.txtnFactura.text() == "":
+            m.setText("Captura el número de factura")
+            self.fexp.txtnFactura.setFocus()        
+        else:
+            regGasto = Reg_Gasto(
+                num_fact=self.fexp.txtnFactura.text().upper(),
+                n_proveedor=self.fexp.cmbProveedor.currentText(),
+                t_gasto=self.fexp.cmbTipoGasto.currentText(),
+                desc_gasto=self.fexp.txtDescripcion.toPlainText(),
+                f_pago=self.fexp.cmbFormaPago.currentText(),
+                n_cheque=self.fexp.txtn_cheque.text().upper(),
+                i_pago=float(self.fexp.txtImporte.text()),
+                iva_ret=float(self.fexp.txtIVA_ret.text()),
+                isr_ret=float(self.fexp.txtISR_ret.text()),
+                f_gasto=self.fexp.boxDate.date().toString("yyyy-MM-dd"),
+                usuario=self.pp.lblName_User.text(),
+                f_reg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                )
+            objData = RegGastoData()
+            if objData._registrar(info=regGasto):
+                m.setText("Gasto registrado con éxito")
+                self.limpiar_campos_fexp()
+            else:
+                m.setText("Error al registrar el gasto")
+                self.limpiar_campos_fexp()
+        m.exec()
+
+    def limpiar_campos_fexp(self):
+        self.fexp.cmbProveedor.setCurrentIndex(0)
+        self.fexp.txtnFactura.setText("")
+        self.fexp.cmbTipoGasto.setCurrentIndex(0)
+        self.fexp.txtDescripcion.setText("")
+        self.fexp.cmbFormaPago.setCurrentIndex(0)
+        self.fexp.txtn_cheque.setText("")
+        self.fexp.txtImporte.setText("")
+        self.fexp.txtIVA_ret.setText("")
+        self.fexp.txtISR_ret.setText("")
     
     def salir_form_gastos(self):
         self.fexp.close()
