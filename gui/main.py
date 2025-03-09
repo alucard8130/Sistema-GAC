@@ -22,6 +22,7 @@ from data.usuario import UsuarioData
 from model.ctasbancos import Cuentas
 from model.editcontrato import EditContrato
 from model.operaciones import Reg_Cartera, Reg_Cobranza, Reg_Factura
+from model.regProveedor import RegProveedor
 from model.regareac import RegAC
 from model.regcliente import RegCliente
 from model.regcontrato import RegContrato
@@ -1894,7 +1895,65 @@ class PantallaPrincipal():
         self.fprov.btnSalir.clicked.connect(self.salir_form_proveedores)
         
     def registrar_proveedor(self):
-        pass
+        m = QMessageBox()
+        m.setIcon(QMessageBox.Icon.Information)
+        m.setWindowTitle("Registro Proveedor")
+        m.setStandardButtons(QMessageBox.StandardButton.Ok)
+
+        if self.fprov.txtRazon_social.text() == "":
+            m.setText("Captura nombre del proveedor")
+            self.fprov.txtRazon_social.setFocus()
+        elif self.fprov.txtRFC.text() == "":
+            m.setText("Captura RFC del proveedor")
+            self.fprov.txtRFC.setFocus()
+        elif self.fprov.cmbServicios.currentIndex() == 0:
+            m.setText("Selecciona un tipo de servicio")
+            self.fprov.cmbServicios.setFocus()
+        elif self.fprov.txtBanco.text()=="":
+            m.setText("Captura banco")
+            self.fprov.txtBanco.setFocus()            
+        elif self.fprov.txtDireccion.text() == "":
+            m.setText("Captura dirección del proveedor")
+            self.fprov.txtDireccion.setFocus()
+        elif self.fprov.txtTelefono.text() == "":
+            m.setText("Captura teléfono del proveedor")
+            self.fprov.txtTelefono.setFocus()
+        elif not self.fprov.txtTelefono.text().isnumeric():
+            m.setText("Captura solo números en el teléfono")
+            self.fprov.txtTelefono.setText("")
+            self.fprov.txtTelefono.setFocus()
+        elif self.fprov.txtEmail.text() == "":
+            m.setText("Captura email del proveedor")
+            self.fprov.txtEmail.setFocus()
+        else:
+            regProveedor = RegProveedor(
+                nombre=self.fprov.txtRazon_social.text().upper(),
+                rfc=self.fprov.txtRFC.text().upper(),
+                tipoServicio=self.fprov.cmbServicios.currentText(),
+                cuentaBanco=self.fprov.txtBanco.text().upper(),
+                direccion=self.fprov.txtDireccion.text(),
+                telefono=self.fprov.txtTelefono.text(),
+                email=self.fprov.txtEmail.text().lower(),
+                usuario=self.pp.lblName_User.text(),
+                fechareg=current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+            )
+            objData = ProveedoresData()
+            if objData.registrar(info=regProveedor):
+                m.setText("Proveedor registrado con éxito")
+                self.limpiar_campos_fprov()
+            else:
+                m.setText("Proveedor ya registrado")
+                self.limpiar_campos_fprov()
+        m.exec()
+
+    def limpiar_campos_fprov(self):
+        self.fprov.txtRazon_social.setText("")
+        self.fprov.txtRFC.setText("")
+        self.fprov.txtDireccion.setText("")
+        self.fprov.txtTelefono.setText("")
+        self.fprov.txtEmail.setText("")
+        self.fprov.cmbServicios.setCurrentIndex(0)
+        self.fprov.txtBanco.setText("")
     
     def salir_form_proveedores(self):
         self.fprov.close()       
